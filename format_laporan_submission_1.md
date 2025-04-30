@@ -7,7 +7,7 @@ Ini adalah karya asli saya. Karya ini belum pernah diajukan sebelumnya untuk kel
 ## 1. Pendahuluan
 
 ### 1.1 Pernyataan Masalah
-Industri fashion menghadapi dinamika yang cepat, dengan tren dan perilaku konsumen yang berubah secara drastis—hal ini menuntut adanya sistem prediksi yang andal. Proyek ini bertujuan untuk **meramalkan tren fashion di masa depan** dengan memanfaatkan data historis penjualan (sales count) dari tahun 2018 hingga 2022. Prediksi tersebut sangat membantu untuk:
+Industri fashion menghadapi dinamika yang cepat, dengan tren dan perilaku konsumen yang berubah secara drastis, hal ini menuntut adanya sistem prediksi yang andal. Proyek ini bertujuan untuk **meramalkan tren fashion di masa depan** dengan memanfaatkan data historis penjualan (sales count) dari tahun 2018 hingga 2022. Prediksi tersebut sangat membantu untuk:
 - Mengoptimalkan rantai pasok.
 - Mendukung strategi pemasaran.
 - Menentukan perencanaan inventaris produk fashion.

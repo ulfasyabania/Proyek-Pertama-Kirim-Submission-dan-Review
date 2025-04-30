@@ -17,7 +17,7 @@ Industri fashion menghadapi dinamika yang cepat, dengan tren dan perilaku konsum
 - **Praproses dan Transformasi Data:** Menyiapkan data secara tepat agar layak untuk pengembangan model peramalan.
 - **Pengembangan Model:** Mengimplementasikan model ARIMA sebagai baseline dan model LSTM sebagai pendekatan deep learning untuk peramalan deret waktu.
 - **Evaluasi Model:** Mengukur performa masing-masing model menggunakan metrik evaluasi seperti MAE dan RMSE, serta melakukan validasi secara visual.
-- **Dokumentasi:** Menyusun laporan secara terstruktur sehingga seluruh proses—from problem clarification hingga evaluasi akhir—dapat ditelusuri dengan jelas.
+- **Dokumentasi:** Menyusun laporan secara terstruktur sehingga seluruh proses dari problem clarification hingga evaluasi akhir, dapat ditelusuri dengan jelas.
 
 ### 1.3 Referensi
 - [Fashion Forecasting: Types, Purpose, Steps and Influence – Textile Learner](https://textilelearner.net/fashion-forecasting-types-purpose-steps/)

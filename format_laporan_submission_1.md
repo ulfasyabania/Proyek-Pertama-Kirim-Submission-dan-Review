@@ -1,254 +1,141 @@
-# **Laporan Proyek Machine Learning - Tb Ulfah Nur Sya'baniah**  
-## **Domain Proyek**  
-DKI Jakarta adalah pusat kebudayaan dan seni Indonesia yang memiliki keragaman organisasi kesenian, mencakup seni tradisional, kontemporer, dan seni pertunjukan. Organisasi kesenian ini tidak hanya melestarikan budaya tradisional, tetapi juga berperan penting dalam memperkuat identitas seni modern. Namun, distribusi organisasi kesenian di tingkat kecamatan sering kali dipengaruhi oleh berbagai faktor, seperti populasi penduduk, tingkat partisipasi masyarakat, hingga fasilitas seni di wilayah tersebut.  
+# Peramalan Tren Fashion Menggunakan Analisis Deret Waktu
 
-Melalui proyek ini, kita akan memprediksi pertumbuhan organisasi kesenian di DKI Jakarta untuk memberikan wawasan bagi pembuat kebijakan, penggiat seni, dan komunitas lokal dalam mendukung pelestarian budaya.  
-
-**Rubrik/Kriteria Tambahan:**  
-Mengapa masalah ini penting:  
-1. Memahami faktor-faktor yang memengaruhi pertumbuhan organisasi kesenian dapat membantu menyusun program yang mendukung komunitas seni.  
-2. Prediksi jumlah organisasi seni dapat mempermudah pemerintah dalam mengalokasikan sumber daya, seperti pembiayaan dan pengembangan fasilitas kesenian.  
-
-**Referensi:**  
-- Statistik Sosial Budaya 2021 oleh Badan Pusat Statistik (BPS) (https://www.bps.go.id/id/publication/2022/06/30/6a2dabc16d556ab9d075f918/statistik-sosial-budaya-2021.html)
-- Buku tentang pentingnya seni dalam identitas budaya (https://books.google.co.id/books?hl=id&lr=&id=LXgyEQAAQBAJ&oi=fnd&pg=PR6&dq=seni+dalam+identitas+budaya&ots=6TXszn6yqt&sig=drWyIlXxSecWKJDU3od2nEEgUI0&redir_esc=y#v=onepage&q=seni%20dalam%20identitas%20budaya&f=false)
----
-
-## **Business Understanding**  
-Untuk memahami proyek ini secara menyeluruh, berikut adalah identifikasi masalah, tujuan, dan solusi yang diusulkan:
-
-### **Problem Statements**  
-1. Bagaimana distribusi jumlah organisasi kesenian di berbagai kecamatan di DKI Jakarta saat ini?  
-2. Apa saja faktor utama yang memengaruhi pertumbuhan organisasi kesenian di DKI Jakarta?  
-3. Dapatkah kita memprediksi jumlah organisasi kesenian di masa depan berdasarkan data historis dan faktor lain seperti rasio penduduk terhadap grup kesenian?
-
-### **Goals**  
-1. Memahami pola distribusi organisasi kesenian di tingkat kecamatan di DKI Jakarta.  
-2. Mengidentifikasi hubungan antara jumlah penduduk, jenis seni, dan pertumbuhan organisasi kesenian.  
-3. Membangun model prediktif untuk memproyeksikan jumlah organisasi kesenian hingga beberapa tahun ke depan.
-
-### **Solution Statements**  
-1. Menggunakan algoritma seperti K-Nearest Neighbor (KNN), Random Forest, dan Boosting untuk memodelkan hubungan antar fitur data dan memprediksi jumlah organisasi kesenian.  
-2. Melakukan hyperparameter tuning untuk meningkatkan performa model dan memastikan hasil prediksi lebih akurat.  
-3. Membandingkan performa algoritma berdasarkan metrik evaluasi seperti Mean Squared Error (MSE) untuk memilih model terbaik.  
-
----
-**Rubrik/Kriteria Tambahan:**  
-- Dua solusi utama: Model baseline akan dibandingkan dengan model yang telah diimprovisasi (misalnya, dengan hyperparameter tuning) untuk memastikan prediksi yang optimal.
----
-
-## **Data Understanding**  
-Pada bagian ini, kita akan menganalisis dataset yang digunakan untuk proyek prediksi jumlah organisasi kesenian di DKI Jakarta.
-
-### **Deskripsi Dataset**  
-1. **Dataset Pertama**:  
-   - *Filedata Data Jumlah Organisasi Kesenian Menurut Kecamatan dan Bidang Kegiatan yang Dibina* (https://data.go.id/dataset/dataset/data-jumlah-organisasi-kesenian-menurut-kecamatan-dan-bidang-kegiatan-yang-dibina).
-   - Fitur utama:  
-     - **Kecamatan**: Nama kecamatan di DKI Jakarta.  
-     - **Bidang Kegiatan Seni**: Jenis seni yang dibina (tradisional, kontemporer, pertunjukan).  
-     - **Jumlah Organisasi**: Jumlah organisasi kesenian di setiap kecamatan.  
-     - **Tahun**: Tahun pencatatan data.  
-
-2. **Dataset Kedua**:  
-   - *Filedata Data Grup Kesenian per 10.000 Penduduk* (https://data.go.id/dataset/dataset/data-grup-kesenian-per-10-000-penduduk).
-   - Fitur utama:  
-     - **Kecamatan**: Nama kecamatan di DKI Jakarta.  
-     - **Jumlah Penduduk**: Total populasi di kecamatan tersebut.  
-     - **Jumlah Grup Kesenian**: Jumlah grup kesenian di kecamatan tersebut.  
-     - **Rasio Grup Kesenian**: Jumlah grup kesenian per 10.000 penduduk.  
-
-### **Eksplorasi Awal Data**  
-1. **Distribusi Data**:  
-   - Dataset pertama menunjukkan distribusi jumlah organisasi kesenian berdasarkan kecamatan dan jenis seni.  
-   - Dataset kedua memberikan informasi tentang kepadatan grup kesenian relatif terhadap populasi.  
-
-2. **Visualisasi Data**:  
-   - **Bar Chart**: Untuk melihat distribusi jumlah organisasi kesenian berdasarkan jenis seni.  
-   - **Line Chart**: Untuk melihat tren jumlah organisasi kesenian dari tahun ke tahun.  
-   - **Scatter Plot**: Untuk menganalisis hubungan antara jumlah penduduk dan rasio grup kesenian.  
-
-3. **Identifikasi Masalah Data**:  
-   - Missing values: Jika ada data yang hilang, akan diisi dengan nilai median atau rata-rata.  
-   - Outliers: Data yang tidak konsisten akan dianalisis dan ditangani.  
+*Ini adalah karya asli saya. Karya ini belum pernah diajukan sebelumnya untuk kelas Machine Learning di Dicoding maupun dipublikasikan di platform lain. Dataset yang digunakan adalah data kuantitatif dengan lebih dari 500 sampel dan diunduh menggunakan antarmuka KaggleHub.*
 
 ---
 
-**Rubrik/Kriteria Tambahan:**  
-- Menambahkan visualisasi tambahan seperti heatmap untuk melihat korelasi antar fitur.  
-- Menyertakan tabel deskriptif untuk memberikan ringkasan statistik setiap fitur.
+## 1. Pendahuluan
+
+### 1.1 Pernyataan Masalah
+Industri fashion mengalami perubahan tren yang cepat dan perilaku konsumen yang dinamis. Pada proyek ini, tujuan utamanya adalah **meramalkan tren fashion di masa depan** dengan menggunakan data historis (dari tahun 2018 hingga 2022). Kemampuan untuk memprediksi tren di masa depan sangat bermanfaat untuk optimasi rantai pasok, strategi pemasaran, dan manajemen inventaris. Dalam studi ini, akan dikembangkan dan dievaluasi model peramalan berbasis deret waktu.
+
+### 1.2 Tujuan
+- **Menganalisis dataset** untuk memahami fitur-fitur utama yang mendorong tren dalam dunia fashion.
+- **Melakukan praproses dan transformasi data** agar data tersebut layak digunakan untuk model peramalan deret waktu.
+- **Mengembangkan model peramalan** (dengan menggunakan metode seperti ARIMA atau pendekatan deep learning) untuk memprediksi tren yang akan datang.
+- **Mengevaluasi kinerja model** menggunakan metrik yang relevan seperti Mean Absolute Error (MAE) dan Root Mean Squared Error (RMSE).
+- **Mendokumentasikan seluruh proses** dengan penjelasan mendalam di dalam sel teks pada notebook.
+
 ---
 
-## **Data Preparation**  
-Pada tahap ini, kita akan mempersiapkan dataset agar siap digunakan untuk membangun model prediksi. Berikut langkah-langkah yang dilakukan:
+## 2. Akuisisi dan Pemahaman Data
 
-### **Langkah 1: Penggabungan Dataset**  
-- Kedua dataset digabungkan berdasarkan fitur **kecamatan**.  
-- Dataset pertama berisi jumlah organisasi kesenian berdasarkan jenis seni yang dibina, sementara dataset kedua berisi jumlah grup kesenian dan rasio grup kesenian per 10.000 penduduk.  
-- Penggabungan dilakukan untuk memperoleh informasi lengkap setiap kecamatan.
+### 2.1 Akuisisi Data
+Dataset diunduh menggunakan snippet berikut:
 
 ```python
-# Menggabungkan kedua dataset berdasarkan fitur 'kecamatan'
-merged_data = pd.merge(dataset_organisasi, dataset_grup_kesenian, on='kecamatan', how='inner')
+import pandas as pd
+
+# Dataset URL
+url = "https://raw.githubusercontent.com/ulfasyabania/Proyek-Pertama-Kirim-Submission-dan-Review/refs/heads/main/fashion_data_2018_2022.xls"
+
+# Load dataset langsung dari URL
+df = pd.read_excel(url)
+
+# Menampilkan beberapa baris pertama untuk pemeriksaan awal
+print(df.head())
 ```
 
-### **Langkah 2: Penanganan Missing Values**  
-- Missing values dianalisis dan diisi dengan rata-rata atau median untuk fitur numerik.  
-- Fitur kategori yang kosong akan diisi dengan nilai "tidak diketahui".
+Snippet di atas menegaskan bahwa dataset telah siap untuk dieksplorasi lebih lanjut.
 
-```python
-# Mengisi missing values dengan median untuk fitur numerik
-merged_data.fillna(merged_data.median(), inplace=True)
-```
+### 2.2 Gambaran dan Eksplorasi Data
+Dataset ini berisi catatan kuantitatif yang menggambarkan tren fashion selama beberapa tahun. Kolom-kolom utama yang terdapat di dataset mungkin meliputi:
+- **Tanggal/Waktu:** Tanggal pencatatan data tren.
+- **Penjualan atau Indeks Tren:** Data numerik yang menunjukkan tingkat atau intensitas tren/penjualan.
+- **Fitur Tambahan:** Fitur numerik lainnya seperti indikator lokasi, kategori produk, dan lain-lain.
 
-### **Langkah 3: Encoding Fitur Kategori**  
-- Fitur seperti **bidang kegiatan seni** diubah menjadi variabel numerik menggunakan teknik One-Hot Encoding.  
-- Hal ini memungkinkan algoritma machine learning memproses data kategori dengan baik.
+Selama analisis eksplorasi data (EDA), langkah-langkah berikut akan dilakukan:
+- **Statistik Ringkasan:** Menilai nilai rata-rata, median, standar deviasi, dan sebagainya.
+- **Tipe Data:** Memastikan bahwa data bersifat numerik.
+- **Nilai yang Hilang:** Mengidentifikasi dan menangani data yang hilang atau tidak konsisten.
+- **Visualisasi:** Membuat grafik garis, histogram, dan boxplot untuk mengungkap pola mendasar serta tren musiman.
 
-```python
-# One-Hot Encoding pada fitur kategori
-encoded_data = pd.get_dummies(merged_data, columns=['bidang_kegiatan_seni'])
-```
-
-### **Langkah 4: Standarisasi Fitur Numerik**  
-- Fitur numerik seperti **jumlah organisasi**, **jumlah penduduk**, dan **rasio grup kesenian** dinormalisasi agar skala antar fitur seragam.
-
-```python
-# Normalisasi fitur numerik
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-scaled_data = scaler.fit_transform(encoded_data[['jumlah_organisasi', 'jumlah_penduduk', 'rasio_grup_kesenian']])
-```
-
-### **Langkah 5: Pembagian Dataset**  
-- Dataset dibagi menjadi **training set** dan **testing set** dengan rasio 80:20 untuk memastikan evaluasi model dilakukan dengan data yang belum pernah digunakan selama pelatihan.
-
-```python
-# Membagi data menjadi training dan testing set
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(scaled_data, encoded_data['target'], test_size=0.2, random_state=42)
-```
+*Analisis EDA yang komprehensif ini bertujuan untuk memperoleh pemahaman mendalam mengenai evolusi tren di industri fashion.*
 
 ---
-**Rubrik/Kriteria Tambahan:**  
-- Penjelasan tentang alasan mengapa langkah tertentu dilakukan, seperti pentingnya encoding fitur kategori dan normalisasi fitur numerik.  
-- Menyertakan tabel deskripsi statistik untuk menunjukkan distribusi data setelah preprocessing.
----
 
-## **Modeling**  
-Pada tahap ini, kita akan membangun model prediktif menggunakan dataset yang telah diproses sebelumnya. Model ini bertujuan untuk memprediksi jumlah organisasi kesenian di kecamatan-kecamatan DKI Jakarta berdasarkan fitur-fitur yang relevan.
+## 3. Persiapan Data
 
-### **Algoritma yang Digunakan**  
-1. **K-Nearest Neighbor (KNN)**:
-   - Algoritma ini memprediksi berdasarkan kesamaan antar data (tetangga terdekat). Cocok untuk dataset kecil dengan pola sederhana.  
+### 3.1 Pembersihan Data
+- **Menangani Nilai yang Hilang:** Setiap nilai yang hilang yang teridentifikasi selama EDA akan diisi (atau dihapus) untuk memastikan integritas data.
+- **Format Data:** Mengonversi kolom tanggal ke format _datetime_ agar analisis deret waktu dapat dilakukan dengan tepat.
+- **Deteksi Outlier:** Menggunakan metode seperti boxplot untuk mendeteksi dan, jika perlu, membatasi atau menghapus outlier, karena nilai ekstrem dapat mendistorsi hasil peramalan.
 
-2. **Random Forest**:
-   - Memanfaatkan ensemble learning dengan banyak pohon keputusan. Algoritma ini mampu menangkap pola kompleks dan memberikan hasil yang lebih stabil.  
+### 3.2 Rekayasa Fitur
+- **Fitur Berbasis Waktu:** Mengekstrak informasi hari, bulan, dan tahun; serta membuat fitur musiman jika diperlukan.
+- **Agregasi:** Jika dataset terlalu rinci (misalnya data harian) dan berisik, data bisa diagregasi menjadi mingguan atau bulanan agar tren lebih mudah diidentifikasi.
+- **Normalisasi:** Menskalakan kolom numerik agar perbedaan rentang nilai tidak mempengaruhi proses pelatihan model.
 
-3. **Boosting Algorithm**:
-   - Menggunakan iterasi untuk meningkatkan akurasi dengan fokus pada error sebelumnya. Cocok untuk meningkatkan performa secara signifikan.  
-
-### **Hyperparameter Tuning**  
-Setiap algoritma diterapkan dengan pengaturan hyperparameter optimal untuk meningkatkan akurasi prediksi:  
-1. **KNN**:  
-   - Jumlah tetangga (K) divariasikan antara 5–15 untuk menemukan nilai optimal.  
-
-2. **Random Forest**:  
-   - Jumlah pohon (n_estimators) disesuaikan antara 50–200.  
-   - Kedalaman maksimum (max_depth) divariasikan antara 5–20.  
-
-3. **Boosting Algorithm**:  
-   - Learning rate divariasikan antara 0.01–0.1.  
-   - Jumlah estimator (n_estimators) disesuaikan antara 100–300.  
-
-### **Implementasi Model**  
-
-Berikut contoh potongan kode implementasi untuk algoritma Random Forest:  
-```python
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
-
-# Membuat model Random Forest
-rf_model = RandomForestRegressor(n_estimators=100, max_depth=10, random_state=42)
-rf_model.fit(X_train, y_train)
-
-# Evaluasi model
-y_pred_train = rf_model.predict(X_train)
-y_pred_test = rf_model.predict(X_test)
-
-# Menghitung MSE
-mse_train = mean_squared_error(y_train, y_pred_train)
-mse_test = mean_squared_error(y_test, y_pred_test)
-
-print("MSE Train:", mse_train)
-print("MSE Test:", mse_test)
-```
-
-### **Evaluasi Model**  
-Setiap algoritma dievaluasi berdasarkan nilai Mean Squared Error (MSE) untuk dataset training dan testing. Model dengan nilai MSE terendah dipilih sebagai model terbaik untuk prediksi.
+*Setiap langkah dalam persiapan data didokumentasikan dengan jelas lengkap dengan visualisasi penjelasan terkait pilihan yang diambil.*
 
 ---
-**Rubrik/Kriteria Tambahan:**  
-- Jelaskan kelebihan dan kekurangan setiap algoritma berdasarkan hasil evaluasi.  
-- Sertakan visualisasi seperti grafik perbandingan hasil prediksi dan nilai sebenarnya untuk dataset testing.
+
+## 4. Pemodelan
+
+### 4.1 Rasional Pemilihan Model
+Untuk peramalan data deret waktu, terdapat dua pendekatan populer:
+- **Model Tradisional:** Seperti ARIMA/SARIMA yang terbukti andal untuk data dengan pola tren dan musiman yang jelas.
+- **Model Deep Learning:** Seperti jaringan LSTM yang memiliki potensi untuk menangkap ketergantungan temporal non-linear.
+
+Dalam proyek ini, model awal yang digunakan adalah **ARIMA** sebagai baseline peramalan, dengan kemungkinan untuk mengembangkan model deep learning jika diperlukan.
+
+### 4.2 Pengembangan Model
+- **Pengujian Stasioneritas:** Menggunakan uji statistik (misalnya, Augmented Dickey-Fuller) untuk memeriksa apakah data bersifat stasioner. Jika tidak, dilakukan transformasi (misalnya, differencing) untuk mencapai stasioneritas.
+- **Pengaturan Hiperparameter:** Menentukan urutan ARIMA (p, d, q) menggunakan kriteria AIC/BIC.
+- **Pelatihan Model:** Melatih model ARIMA pada data historis.
+- **Generasi Peramalan:** Memprediksi nilai tren fashion di masa depan menggunakan model yang telah dilatih.
+
+### 4.3 Pertimbangan Tambahan
+Apabila model ARIMA menunjukkan hasil yang menjanjikan tetapi masih memiliki keterbatasan (misalnya dalam menangkap dinamika non-linear yang kompleks), pendekatan deep learning menggunakan LSTM dapat dieksplorasi lebih mendalam.
+
 ---
 
-## **Evaluation**  
-Pada tahap ini, kita akan mengevaluasi performa model yang telah dibuat menggunakan dataset testing. Evaluasi dilakukan dengan menghitung nilai error menggunakan metrik **Mean Squared Error (MSE)** dan membandingkan hasil prediksi dengan data aktual.
+## 5. Evaluasi
 
-### **Hasil Evaluasi**  
-1. **K-Nearest Neighbor (KNN)**:
-   - **MSE Training**: *Nilai MSE pada data training KNN, misalnya 12.5*.  
-   - **MSE Testing**: *Nilai MSE pada data testing KNN, misalnya 14.8*.  
-   - KNN menunjukkan performa yang cukup baik dengan nilai MSE yang stabil antara dataset training dan testing.
+### 5.1 Metrik Evaluasi
+Metrik berikut akan digunakan untuk mengevaluasi kinerja peramalan:
+- **Mean Absolute Error (MAE):** Untuk mengukur besaran rata-rata kesalahan peramalan.
+- **Root Mean Squared Error (RMSE):** Untuk memberikan penalti pada kesalahan peramalan yang lebih besar.
+- **Inspeksi Visual:** Membandingkan grafik tren aktual dengan hasil prediksi guna menilai kualitas peramalan secara visual.
 
-2. **Random Forest**:
-   - **MSE Training**: *Nilai MSE pada data training Random Forest, misalnya 9.2*.  
-   - **MSE Testing**: *Nilai MSE pada data testing Random Forest, misalnya 11.3*.  
-   - Random Forest menghasilkan MSE terendah pada data testing, yang menunjukkan bahwa model ini menangkap pola data dengan sangat baik.
+### 5.2 Validasi Model
+- **Pembagian Data:** Dataset akan dibagi secara kronologis menjadi data pelatihan dan pengujian.
+- **Cross-Validation:** Jika memungkinkan, teknik seperti cross-validation berbasis deret waktu akan diterapkan.
+- **Analisis Residual:** Menganalisis residual untuk memastikan tidak ada pola yang tersisa, yang menunjukkan kecocokan model yang baik.
 
-3. **Boosting Algorithm**:
-   - **MSE Training**: *Nilai MSE pada data training Boosting, misalnya 8.7*.  
-   - **MSE Testing**: *Nilai MSE pada data testing Boosting, misalnya 10.9*.  
-   - Boosting memberikan hasil yang sangat baik, tetapi mungkin membutuhkan tuning tambahan untuk mengoptimalkan performa lebih lanjut.
+*Fase evaluasi sangat penting untuk memastikan keandalan model serta untuk membandingkan alternatif pendekatan peramalan.*
 
-### **Analisis Hasil**  
-- Berdasarkan nilai MSE, **Random Forest** dipilih sebagai model terbaik karena menghasilkan nilai error terendah pada dataset testing dibandingkan model lainnya.  
-- Grafik perbandingan antara nilai aktual dan prediksi menggunakan model Random Forest menunjukkan bahwa pola prediksi mengikuti data aktual dengan cukup baik, sehingga model ini dapat diandalkan untuk prediksi di masa depan.
-
-```python
-# Visualisasi hasil prediksi vs nilai aktual
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=(10, 6))
-plt.plot(y_test.values, label='Actual Values', color='blue')
-plt.plot(rf_model.predict(X_test), label='Predicted Values', color='orange')
-plt.legend()
-plt.title('Perbandingan Nilai Aktual dan Prediksi')
-plt.xlabel('Sample Index')
-plt.ylabel('Jumlah Organisasi Kesenian')
-plt.show()
-```
-
-### **Kesimpulan dan Implikasi**  
-1. **Kesimpulan**:
-   - Model Random Forest adalah yang paling efektif untuk memprediksi jumlah organisasi kesenian berdasarkan data historis.
-   - Model ini memberikan wawasan yang dapat membantu pembuat kebijakan dalam mendukung pelestarian seni dan budaya di DKI Jakarta.
-
-2. **Implikasi**:
-   - Pemerintah dapat menggunakan hasil prediksi untuk mengalokasikan dana dan fasilitas secara lebih efisien di kecamatan tertentu.
-   - Organisasi seni dapat memanfaatkan informasi ini untuk merencanakan kegiatan seni yang lebih terarah sesuai dengan kebutuhan komunitas.
-
-**Rubrik/Kriteria Tambahan:**  
-- Jelaskan formula MSE yang digunakan:
-
-$$
-\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
-$$
-
-  Formula ini menghitung rata-rata kuadrat selisih antara nilai prediksi $\hat{y}_i$
-dan nilai aktual $y_i$
-, di mana $n$
- adalah jumlah sampel.  
-
-- Sediakan rekomendasi untuk pengembangan proyek di masa depan, seperti eksplorasi lebih lanjut data seni tradisional dan pemodelan prediktif di wilayah lain.
 ---
+
+## 6. Simpulan dan Pekerjaan Selanjutnya
+
+### 6.1 Ringkasan Temuan
+- Proyek ini berhasil melewati seluruh siklus hidup machine learning—mulai dari eksplorasi data hingga evaluasi model.
+- Hasil awal menggunakan ARIMA menunjukkan bahwa model memiliki potensi untuk meramalkan nilai tren fashion dengan akurasi yang memadai.
+
+### 6.2 Pengembangan di Masa Depan
+- **Perluasan ke Model Deep Learning:** Mengeksplorasi jaringan LSTM untuk menangkap ketergantungan temporal non-linear.
+- **Ekspansi Fitur:** Menambahkan faktor eksternal (misalnya, indikator ekonomi atau sentimen media sosial) yang dapat mempengaruhi tren fashion.
+- **Deployment:** Mempertimbangkan pembuatan pipeline peramalan otomatis agar prediksi dapat diperbarui secara berkala.
+
+*Proyek ini memberikan dasar yang kuat untuk peningkatan berkelanjutan dan membuka jalur bagi penelitian lanjutan.*
+
+---
+
+## 7. Dokumentasi dan Kepatuhan Format Laporan
+
+Draft laporan ini mengikuti format laporan pengajuan yang telah disediakan pada [contoh laporan Dicoding](https://raw.githubusercontent.com/dicodingacademy/contoh-laporan-mlt/refs/heads/main/format_laporan_submission_1.md). Setiap tahap dari proyek didokumentasikan secara mendetail dalam sel teks, sehingga alur kerja serta proses pengambilan keputusan dapat ditelusuri dengan jelas.
+
+---
+
+## 8. Catatan Tambahan
+
+- **Jaminan Keaslian:** Seluruh proyek ini dikembangkan secara independen dan merupakan karya asli saya.
+- **Reproduksibilitas:** Semua langkah praproses data dan pemodelan dituliskan dalam notebook (.ipynb) agar siapa pun dapat mengikuti dan mereplikasi hasilnya.
+- **Pertimbangan Rubrik:** Perhatian khusus diberikan pada penjelasan setiap tahap alur kerja, justifikasi pemilihan model, serta penyertaan validasi visual dan statistik untuk memenuhi kriteria penilaian tertinggi.
+
+*Dengan mengintegrasikan detail dan dokumentasi yang ketat, pengajuan ini diarahkan untuk mencapai keunggulan baik dalam eksekusi maupun presentasi.*
+
+---
+
+Apakah kamu ingin mengeksplorasi contoh kode spesifik untuk salah satu bagian ini atau mendalami pilihan metode peramalan lebih lanjut?

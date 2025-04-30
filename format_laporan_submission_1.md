@@ -16,6 +16,9 @@ Industri fashion mengalami perubahan tren yang cepat dan perilaku konsumen yang 
 - **Mengevaluasi kinerja model** menggunakan metrik yang relevan seperti Mean Absolute Error (MAE) dan Root Mean Squared Error (RMSE).
 - **Mendokumentasikan seluruh proses** dengan penjelasan mendalam di dalam sel teks pada notebook.
 
+### 1.3 Referensi
+https://textilelearner.net/fashion-forecasting-types-purpose-steps/
+
 ---
 
 ## 2. Akuisisi dan Pemahaman Data
@@ -137,5 +140,3 @@ Draft laporan ini mengikuti format laporan pengajuan yang telah disediakan pada 
 *Dengan mengintegrasikan detail dan dokumentasi yang ketat, pengajuan ini diarahkan untuk mencapai keunggulan baik dalam eksekusi maupun presentasi.*
 
 ---
-
-Apakah kamu ingin mengeksplorasi contoh kode spesifik untuk salah satu bagian ini atau mendalami pilihan metode peramalan lebih lanjut?

@@ -112,31 +112,40 @@ Metrik berikut akan digunakan untuk mengevaluasi kinerja peramalan:
 
 ## 6. Simpulan dan Pekerjaan Selanjutnya
 
+---
+
 ### 6.1 Ringkasan Temuan
 - Proyek ini berhasil melewati seluruh siklus hidup machine learning—mulai dari eksplorasi data hingga evaluasi model.
 - Hasil awal menggunakan ARIMA menunjukkan bahwa model memiliki potensi untuk meramalkan nilai tren fashion dengan akurasi yang memadai.
 
-### 6.2 Pengembangan di Masa Depan
-- **Perluasan ke Model Deep Learning:** Mengeksplorasi jaringan LSTM untuk menangkap ketergantungan temporal non-linear.
-- **Ekspansi Fitur:** Menambahkan faktor eksternal (misalnya, indikator ekonomi atau sentimen media sosial) yang dapat mempengaruhi tren fashion.
-- **Deployment:** Mempertimbangkan pembuatan pipeline peramalan otomatis agar prediksi dapat diperbarui secara berkala.
+Dalam proyek peramalan tren fashion ini, saya telah mengimplementasikan dua pendekatan peramalan deret waktu, yaitu:
 
-*Proyek ini memberikan dasar yang kuat untuk peningkatan berkelanjutan dan membuka jalur bagi penelitian lanjutan.*
+1. **Model ARIMA:**  
+   - ARIMA menggunakan pendekatan statistik yang efektif untuk menangkap pola musiman dan tren linier.  
+   - Hasil evaluasi pada data test menunjukkan bahwa model ARIMA menghasilkan MAE sekitar 21,67 dan RMSE sekitar 27,40, yang mengindikasikan ketepatan prediksi yang cukup baik untuk dataset ini.
 
+2. **Model LSTM:**  
+   - LSTM merupakan metode deep learning yang mampu menangkap pola non-linear dalam data deret waktu.  
+   - Evaluasi pada data validasi memberikan MAE sekitar 25,75 dan RMSE sekitar 31,08.  
+   - Meskipun secara kuantitatif hasil LSTM sedikit kurang dibandingkan dengan ARIMA, model ini memiliki potensi yang sangat baik dan dapat dioptimalkan lebih lanjut (misalnya dengan tuning hyperparameter atau penambahan fitur tambahan).
+
+**Hasil Peramalan:**  
+Kedua model telah digunakan untuk meramalkan _sales count_ hingga 5 tahun ke depan (60 bulan), dan hasil peramalan divisualisasikan bersama data aktual. Visualisasi tersebut menunjukkan bahwa kedua model mampu mengidentifikasi tren peningkatan yang konsisten, meskipun terdapat perbedaan kecil dalam nilai prediksi.
+
+---
+
+### 6.2 **Rekomendasi dan Pengembangan Selanjutnya:**  
+- **Tuning Model:** Lakukan pencarian parameter optimal (misalnya dengan auto_arima untuk ARIMA dan eksperimen arsitektur untuk LSTM) guna meningkatkan akurasi.
+- **Integrasi Variabel Eksternal:** Pertimbangkan untuk menambahkan fitur eksternal yang berkaitan dengan tren fashion, seperti data ekonomi atau sentimen media sosial, untuk memperkaya model.
+- **Optimalisasi Model LSTM:** Eksplorasi penggunaan dropout, penambahan layer, atau modifikasi konfigurasi LSTM untuk meningkatkan generalisasi model.
+
+Secara keseluruhan, proyek ini menunjukkan bahwa analisis deret waktu dapat diterapkan secara efektif dalam peramalan tren fashion. Hasil dari kedua pendekatan digunakan sebagai dasar untuk pengambilan keputusan di bidang manajemen rantai pasok, strategi pemasaran, dan perencanaan inventaris produk fashion. Meskipun model ARIMA saat ini memberikan hasil yang lebih baik secara kuantitatif, peluang optimasi lebih lanjut pada LSTM menjadikannya kandidat yang menjanjikan untuk eksplorasi mendalam di masa depan.
+
+Proyek ini memberikan dasar yang kuat untuk peningkatan berkelanjutan dan membuka jalur bagi penelitian lanjutan.
 ---
 
 ## 7. Dokumentasi dan Kepatuhan Format Laporan
 
 Draft laporan ini mengikuti format laporan pengajuan yang telah disediakan pada [contoh laporan Dicoding](https://raw.githubusercontent.com/dicodingacademy/contoh-laporan-mlt/refs/heads/main/format_laporan_submission_1.md). Setiap tahap dari proyek didokumentasikan secara mendetail dalam sel teks, sehingga alur kerja serta proses pengambilan keputusan dapat ditelusuri dengan jelas.
-
----
-
-## 8. Catatan Tambahan
-
-- **Jaminan Keaslian:** Seluruh proyek ini dikembangkan secara independen dan merupakan karya asli saya.
-- **Reproduksibilitas:** Semua langkah praproses data dan pemodelan dituliskan dalam notebook (.ipynb) agar siapa pun dapat mengikuti dan mereplikasi hasilnya.
-- **Pertimbangan Rubrik:** Perhatian khusus diberikan pada penjelasan setiap tahap alur kerja, justifikasi pemilihan model, serta penyertaan validasi visual dan statistik untuk memenuhi kriteria penilaian tertinggi.
-
-*Dengan mengintegrasikan detail dan dokumentasi yang ketat, pengajuan ini diarahkan untuk mencapai keunggulan baik dalam eksekusi maupun presentasi.*
 
 ---

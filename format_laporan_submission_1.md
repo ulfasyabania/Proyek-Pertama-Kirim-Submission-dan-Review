@@ -27,7 +27,9 @@ Industri fashion menghadapi dinamika yang cepat, dengan tren dan perilaku konsum
 ## 2. Akuisisi dan Pemahaman Data
 
 ### 2.1 Akuisisi Data
-Dataset diunduh langsung dari URL berikut:
+Dataset diunduh langsung dari URL berikut: https://www.kaggle.com/datasets/fashionworldda/fashion-trend-dataset
+
+atau
 
 ```python
 import pandas as pd

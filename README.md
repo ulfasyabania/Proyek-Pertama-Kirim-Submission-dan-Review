@@ -1,216 +1,292 @@
 ---
 
-# Laporan Proyek Machine Learning - Tb Ulfah Nur Sya'baniah
+## Laporan Proyek Machine Learning – [Nama Anda]  
+**Domain Proyek: Prediksi Hasil Panen Padi di Jawa Barat**
 
 ---
 
-## 1. Domain Proyek
+### 1. Latar Belakang dan Business Understanding
 
-**Latar Belakang:**  
-Proyek ini mengambil domain **Predictive Maintenance (Pemeliharaan Prediktif)** pada mesin produksi. Di industri manufaktur dan produksi, kerusakan mesin dapat mengakibatkan downtime yang signifikan, menurunkan produktivitas, dan meningkatkan biaya operasional. Dengan menganalisis parameter operasional seperti suhu udara, suhu proses, kecepatan rotasi, torsi, dan keausan alat, kita dapat memprediksi potensi kegagalan mesin lebih dini dan mengoptimalkan jadwal perawatan.
-
-**Alasan dan Riset Terkait:**  
-- Dengan menerapkan teknik machine learning, perusahaan dapat mengurangi biaya pemeliharaan mendadak (unscheduled maintenance) dan meningkatkan efisiensi proses produksi.
-- Studi-studi telah menunjukkan bahwa penggunaan algoritma prediktif dalam predictive maintenance dapat meningkatkan akurasi prediksi dan mengurangi downtime.  
-(Sumber data: UCI Machine Learning Repository: (https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset))
-
----
-
-## 2. Business Understanding
+Di era digital dengan pertanian yang semakin mengadopsi teknologi, prediksi hasil panen menjadi aspek kunci untuk membantu petani mengoptimalkan penggunaan lahan, jenis pupuk, dan irigasi. Proyek ini bertujuan membangun model prediktif untuk memprediksi *Hasil Panen (ton)* berdasarkan variabel-variabel seperti:  
+- **Luas Lahan (ha):** luas area yang dialokasikan untuk tanam  
+- **Jenis Pupuk:** tipe pupuk yang digunakan  
+- **Curah Hujan (mm):** curah hujan yang didapat selama periode tanam  
+- **Intensitas Irigasi (kali/minggu):** frekuensi penyiraman lahan  
 
 **Problem Statements:**  
-1. **Pernyataan Masalah 1:** Bagaimana mengidentifikasi potensi kegagalan mesin secara tepat waktu sehingga dapat dilakukan perawatan sebelum terjadi kerusakan total?  
-2. **Pernyataan Masalah 2:** Bagaimana memanfaatkan data operasional mesin untuk meningkatkan efektivitas perawatan preventif dan mengurangi biaya operasional?
+1. Bagaimana memprediksi hasil panen secara akurat berdasarkan faktor-faktor pertanian?  
+2. Bagaimana mengidentifikasi kombinasi optimal dari variabel input yang berkontribusi pada peningkatan hasil panen?  
 
 **Goals:**  
-1. **Goal 1:** Memprediksi kegagalan mesin dengan akurasi yang tinggi berdasarkan parameter sensor dan data historis.  
-2. **Goal 2:** Mengoptimalkan jadwal perawatan (maintenance scheduling) sehingga dapat mencegah downtime yang tidak diinginkan dan meminimalkan biaya perawatan.
+- Menghasilkan model regresi yang mampu memperkirakan hasil panen dengan metrik evaluasi yang baik (misalnya, R² score, MAE, dan MSE).  
+- Menyediakan insight berbasis data mengenai kontribusi masing-masing faktor terhadap hasil panen.  
 
-**Solution Statement (Opsional):**  
-Untuk mencapai goals tersebut, kami mengusulkan:
-- **Solusi 1:** Membangun baseline model klasifikasi menggunakan algoritma seperti Random Forest dan Logistic Regression untuk memprediksi kegagalan mesin.
-- **Solusi 2:** Melakukan hyperparameter tuning dan teknik ensemble untuk meningkatkan performa model, serta mengukur model dengan metrik evaluasi seperti akurasi, precision, recall, dan F1 score.
+**Solution Statements (Opsional):**  
+1. Menggunakan Linear Regression sebagai baseline model.  
+2. Mencoba algoritma lain, seperti Decision Tree Regression dan RandomForest Regression, untuk menguji performa yang lebih baik melalui hyperparameter tuning.  
 
 ---
 
-## 3. Data Understanding
+### 2. Data Understanding
 
-**Deskripsi Dataset:**  
-Dataset yang digunakan adalah *AI4I 2020 Predictive Maintenance Dataset* yang tersedia pada [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset).  
-Beberapa variabel utama dalam data ini antara lain:
-- **UDI:** Unique Identifier untuk setiap sampel.
-- **Product ID and Type:** Identifikasi dan tipe mesin.
-- **Air temperature [K]:** Suhu udara di area tempat mesin bekerja.
-- **Process temperature [K]:** Suhu pada saat proses produksi berlangsung.
-- **Rotational speed [rpm]:** Kecepatan rotasi mesin.
-- **Torque [Nm]:** Torsi yang dihasilkan.
-- **Tool wear [min]:** Lama keausan alat yang digunakan.
-- **Machine failure:** Label target, menunjukkan apakah mesin mengalami kegagalan.
-- **TWF, HDF, PWF, OSF, RNF:** Indikator kegagalan spesifik.
+Dataset yang digunakan bersifat sintetik. Nilainya dihasilkan berdasarkan asumsi dan simulasi sehingga mendekati fenomena nyata. Dataset ini terdiri dari lima variabel:  
 
-**Exploratory Data Analysis (EDA):**  
-Beberapa tahapan EDA yang telah dilakukan meliputi:
-- **Distribusi Data:**  
-  - *Histogram:* Menggunakan `sns.histplot()` untuk melihat sebaran tiap fitur numerik dan mendeteksi pola seperti skewness atau multimodalitas.  
-  - *Boxplot:* Menggunakan `sns.boxplot()` untuk mendeteksi outlier dan memahami ringkasan statistik dari masing-masing fitur.
-- **Analisis Korelasi:**  
-  Matriks korelasi dihitung dengan `df.corr()` dan divisualisasikan dengan `sns.heatmap()`, sehingga dapat diidentifikasi fitur mana yang memiliki keterkaitan tinggi dan berpotensi redundant dalam model.
+- **Luas Lahan (ha)**
+- **Jenis Pupuk**
+- **Curah Hujan (mm)**
+- **Intensitas Irigasi (kali/minggu)**
+- **Hasil Panen (ton)**
 
-_(Misalnya, kode berikut digunakan untuk EDA visual:)_  
+Dataset dapat diunduh melalui sumber berikut:  
+[Dataset Produksi Padi Jawa Barat](https://raw.githubusercontent.com/ulfasyabania/Proyek-Pertama-Kirim-Submission-dan-Review/refs/heads/main/produksi_padi_jabar.csv)
+
+---
+
+### 3. Data Preparation
+
+Tahapan persiapan data meliputi:  
+- **Memeriksa nilai kosong atau tidak sesuai.**  
+- **Mengubah tipe data jika diperlukan.**  
+- **Membagi data menjadi training dan testing set.**
+
+---
+
+### 4. Modeling
+
+Pada tahap ini, kita akan menerapkan beberapa algoritma regresi:  
+- **Linear Regression:** sebagai model baseline.  
+- **Decision Tree Regression dan RandomForest Regression:** sebagai model alternatif dan untuk improvement.
+
+Setiap solusi akan dievaluasi menggunakan metrik evaluasi yang sesuai. Proses hyperparameter tuning dilakukan pada model-model non-linear untuk memperoleh performa terbaik.
+
+---
+
+### 5. Evaluation
+
+Untuk evaluasi model, metrik yang digunakan adalah:  
+- **Mean Absolute Error (MAE)**
+- **Mean Squared Error (MSE)**
+- **R² Score**
+
+Setiap model akan dibandingkan berdasarkan metrik ini untuk memilih model terbaik.
+
+---
+
+### 6. Implementation di Google Colab
+
+Berikut adalah contoh kode lengkap yang dapat Anda gunakan di Google Colab.
+
+---
 
 ```python
-# Visualisasi Distribusi menggunakan Histogram dan Boxplot
+# Cell 1: Import Libraries
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Daftar fitur numerik untuk dianalisis
-numeric_cols = ["Air temperature [K]", "Process temperature [K]", 
-                "Rotational speed [rpm]", "Torque [Nm]", "Tool wear [min]"]
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-# Histogram
-plt.figure(figsize=(15, 10))
-for i, col in enumerate(numeric_cols, 1):
-    plt.subplot(2, 3, i)
-    sns.histplot(df[col], kde=True, bins=30)
-    plt.title(f"Distribusi {col}")
-    plt.xlabel(col)
-    plt.ylabel("Frekuensi")
-plt.tight_layout()
-plt.show()
-
-# Boxplot
-plt.figure(figsize=(15, 5))
-for i, col in enumerate(numeric_cols, 1):
-    plt.subplot(1, len(numeric_cols), i)
-    sns.boxplot(x=df[col])
-    plt.title(f"Boxplot {col}")
-    plt.xlabel(col)
-plt.tight_layout()
-plt.show()
-
-# Matriks Korelasi dan Heatmap
-corr_matrix = df[numeric_cols].corr()
-plt.figure(figsize=(8, 6))
-sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", vmin=-1, vmax=1)
-plt.title("Matriks Korelasi Fitur Numerik")
-plt.show()
+# Set style for plots
+sns.set(style='whitegrid')
 ```
 
 ---
-
-## 4. Data Preparation
-
-**Proses yang Dilakukan:**  
-1. **Pembersihan Data:**  
-   - Pemeriksaan dan penanganan missing values menggunakan `SimpleImputer` jika diperlukan.  
-   - Memastikan bahwa tipe data sesuai dengan yang dibutuhkan untuk analisis.
-2. **Normalisasi Data:**  
-   - Menggunakan `StandardScaler` untuk menormalisasi fitur numerik agar semua fitur berada pada skala yang sama. Hal ini penting agar model machine learning tidak bias terhadap fitur dengan rentang nilai yang besar.
-3. **Split Dataset:**  
-   - Data dibagi menjadi training set dan testing set untuk validasi model.
-
-**Alasan Data Preparation:**  
-Tahapan ini penting untuk memastikan bahwa data siap digunakan untuk proses pemodelan. Normalisasi dan penanganan missing values meningkatkan stabilitas dan akurasi model, sedangkan pembagian dataset memungkinkan evaluasi performa secara adil dan mencegah overfitting.
-
-_(Contoh kode Data Preparation:)_
 
 ```python
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
+# Cell 2: Load the Dataset
+url = "https://raw.githubusercontent.com/ulfasyabania/Proyek-Pertama-Kirim-Submission-dan-Review/refs/heads/main/produksi_padi_jabar.csv"
+data = pd.read_csv(url)
 
-# Misal, kita fokus pada fitur numerik dan label 'Machine failure'
-features = df[numeric_cols]
-label = df["Machine failure"]
-
-# Mengatasi missing values (jika ada) dengan imputasi menggunakan median
-imputer = SimpleImputer(strategy="median")
-features_imputed = imputer.fit_transform(features)
-
-# Normalisasi fitur
-scaler = StandardScaler()
-features_scaled = scaler.fit_transform(features_imputed)
-
-# Membagi data menjadi training dan testing set (misalnya 70:30)
-X_train, X_test, y_train, y_test = train_test_split(features_scaled, label, test_size=0.3, random_state=42)
+# Tampilkan 5 baris pertama
+data.head()
 ```
 
 ---
-
-## 5. Modeling
-
-**Algoritma yang Digunakan:**  
-Dalam proyek ini, kita menerapkan beberapa algoritma untuk memprediksi kegagalan mesin, contohnya:
-- **Logistic Regression**  
-- **Random Forest Classifier**
-
-**Tahapan Pemodelan:**  
-1. **Baseline Model:**  
-   - Menggunakan Logistic Regression sebagai model baseline.
-2. **Improvement Model:**  
-   - Menerapkan Random Forest yang biasanya bisa menangani data nonlinear dan interaksi antar fitur dengan baik.
-3. **Hyperparameter Tuning:**  
-   - Melakukan tuning hyperparameter menggunakan teknik seperti Grid Search untuk meningkatkan performa model.
-
-**Contoh Kode Modeling:**
 
 ```python
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix
+# Cell 3: Data Understanding & EDA
+print("Informasi dataset:")
+data.info()
 
-# Model Baseline: Logistic Regression
-lr_model = LogisticRegression(random_state=42)
-lr_model.fit(X_train, y_train)
-y_pred_lr = lr_model.predict(X_test)
+print("\nStatistik deskriptif:")
+print(data.describe())
 
-print("Classification Report - Logistic Regression:")
-print(classification_report(y_test, y_pred_lr))
-print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred_lr))
+# Cek missing values
+print("\nMissing values per kolom:")
+print(data.isnull().sum())
 
-# Model Improvement: Random Forest
-rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
-rf_model.fit(X_train, y_train)
-y_pred_rf = rf_model.predict(X_test)
+# Visualisasi distribusi tiap variabel
+plt.figure(figsize=(16, 4))
 
-print("Classification Report - Random Forest:")
-print(classification_report(y_test, y_pred_rf))
-print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred_rf))
+plt.subplot(1, 5, 1)
+sns.histplot(data['Luas Lahan (ha)'], kde=True)
+plt.title('Luas Lahan (ha)')
+
+plt.subplot(1, 5, 2)
+sns.countplot(x='Jenis Pupuk', data=data)
+plt.title('Jenis Pupuk')
+
+plt.subplot(1, 5, 3)
+sns.histplot(data['Curah Hujan (mm)'], kde=True)
+plt.title('Curah Hujan (mm)')
+
+plt.subplot(1, 5, 4)
+sns.histplot(data['Intensitas Irigasi (kali/minggu)'], kde=True)
+plt.title('Intensitas Irigasi')
+
+plt.subplot(1, 5, 5)
+sns.histplot(data['Hasil Panen (ton)'], kde=True)
+plt.title('Hasil Panen (ton)')
+
+plt.tight_layout()
+plt.show()
 ```
 
-**Insight Modeling:**  
-- **Kelebihan dan Kekurangan:**  
-  *Logistic Regression* bersifat sederhana dan cepat, tetapi mungkin tidak menangkap interaksi nonlinier antar fitur. *Random Forest* biasanya memberikan performa yang lebih baik karena mampu menangani data kompleks, namun membutuhkan waktu komputasi yang lebih besar.  
-- **Pemilihan Model Terbaik:**  
-  Model terbaik dipilih berdasarkan metrik evaluasi (accuracy, precision, recall, F1 score). Pada proyek ini, jika Random Forest menunjukkan peningkatan performa signifikan dibandingkan Logistic Regression, maka Random Forest dijadikan model akhir.
+---
+
+```python
+# Cell 4: Correlation Analysis
+plt.figure(figsize=(8,6))
+corr_matrix = data.corr()
+sns.heatmap(corr_matrix, annot=True, cmap="YlGnBu")
+plt.title("Correlation Matrix")
+plt.show()
+```
 
 ---
 
-## 6. Evaluation
+```python
+# Cell 5: Data Preparation
+# Pastikan tidak terdapat nilai null, dan jika perlu, lakukan transformasi.
+# Karena dataset sudah bersih (synthetic), kita langsung pisahkan data
 
-**Metrik Evaluasi yang Digunakan:**  
-Untuk mengukur performa model, digunakan beberapa metrik evaluasi, antara lain:  
-- **Accuracy:** Persentase prediksi yang benar secara keseluruhan.  
-- **Precision:** Kemampuan model dalam memprediksi dengan tepat label positif.  
-- **Recall:** Kemampuan model untuk menangkap semua kasus positif.  
-- **F1 Score:** Rata-rata harmonis antara precision dan recall untuk menyeimbangkan trade-off-nya.
+# Fitur (X) dan target (y)
+X = data.drop("Hasil Panen (ton)", axis=1)
+y = data["Hasil Panen (ton)"]
 
-**Hasil Evaluasi:**  
-- Laporan klasifikasi (classification report) dan confusion matrix memberikan gambaran menyeluruh mengenai performa model pada data testing.  
-- Berdasarkan hasil evaluasi ini, kita dapat menentukan apakah model sudah cukup baik untuk diterapkan atau masih memerlukan improvement lebih lanjut seperti penyesuaian hyperparameter, rekayasa fitur, atau eksplorasi algoritma lain.
-
-_(Contoh evaluasi hasil model sudah ditampilkan pada kode modeling di atas.)_
+# Bagi data menjadi training dan testing (80:20)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print("Data training:", X_train.shape)
+print("Data testing:", X_test.shape)
+```
 
 ---
 
-## Kesimpulan dan Rekomendasi
+```python
+# Cell 6: Modeling – Baseline with Linear Regression
+lr = LinearRegression()
+lr.fit(X_train, y_train)
 
-**Kesimpulan:**  
-Menggunakan pendekatan Predictive Maintenance berbasis Machine Learning memungkinkan perusahaan untuk mendeteksi potensi kegagalan mesin lebih awal. Dengan memanfaatkan data operasional dan menerapkan teknik EDA, data preparation, dan pemodelan yang baik, kita dapat mencapai akurasi prediksi yang tinggi.
+# Prediksi pada test set
+y_pred_lr = lr.predict(X_test)
 
-**Rekomendasi:**  
-- Lanjutkan dengan eksplorasi algoritma lainnya (misalnya, Gradient Boosting atau Neural Networks) jika diperlukan.
-- Lakukan perbaikan pada proses rekayasa fitur untuk menangkap pola-pola yang lebih kompleks.
-- Terapkan sistem monitoring real-time di lingkungan operasional untuk pemantauan dan perawatan mesin secara proaktif.
+# Evaluasi Linear Regression
+mae_lr = mean_absolute_error(y_test, y_pred_lr)
+mse_lr = mean_squared_error(y_test, y_pred_lr)
+r2_lr = r2_score(y_test, y_pred_lr)
+
+print("Linear Regression Performance:")
+print("MAE:", mae_lr)
+print("MSE:", mse_lr)
+print("R2 Score:", r2_lr)
+```
+
+---
+
+```python
+# Cell 7: Modeling – Decision Tree Regression
+dt = DecisionTreeRegressor(random_state=42)
+dt.fit(X_train, y_train)
+y_pred_dt = dt.predict(X_test)
+
+mae_dt = mean_absolute_error(y_test, y_pred_dt)
+mse_dt = mean_squared_error(y_test, y_pred_dt)
+r2_dt = r2_score(y_test, y_pred_dt)
+
+print("\nDecision Tree Regression Performance:")
+print("MAE:", mae_dt)
+print("MSE:", mse_dt)
+print("R2 Score:", r2_dt)
+```
+
+---
+
+```python
+# Cell 8: Modeling – Random Forest Regression with Hyperparameter Tuning
+rf = RandomForestRegressor(random_state=42)
+
+# Grid search untuk hyperparameter tuning
+param_grid = {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [None, 5, 10, 20],
+    'min_samples_split': [2, 5, 10]
+}
+
+grid_rf = GridSearchCV(estimator=rf, param_grid=param_grid, cv=3, scoring='r2', n_jobs=-1)
+grid_rf.fit(X_train, y_train)
+print("Best parameters:", grid_rf.best_params_)
+
+# Gunakan model terbaik untuk prediksi
+best_rf = grid_rf.best_estimator_
+y_pred_rf = best_rf.predict(X_test)
+
+mae_rf = mean_absolute_error(y_test, y_pred_rf)
+mse_rf = mean_squared_error(y_test, y_pred_rf)
+r2_rf = r2_score(y_test, y_pred_rf)
+
+print("\nRandom Forest Regression Performance:")
+print("MAE:", mae_rf)
+print("MSE:", mse_rf)
+print("R2 Score:", r2_rf)
+```
+
+---
+
+```python
+# Cell 9: Evaluation Comparison
+results = pd.DataFrame({
+    "Model": ["Linear Regression", "Decision Tree", "Random Forest"],
+    "MAE": [mae_lr, mae_dt, mae_rf],
+    "MSE": [mse_lr, mse_dt, mse_rf],
+    "R2 Score": [r2_lr, r2_dt, r2_rf]
+})
+
+print(results)
+```
+
+---
+
+```python
+# Cell 10: Visualisasi Perbandingan Hasil Prediksi dengan Nilai Aktual
+plt.figure(figsize=(10,5))
+plt.scatter(y_test, y_pred_rf, color='green', alpha=0.6, label='Random Forest')
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'k--', lw=2, label="Ideal")
+plt.xlabel("Nilai Aktual")
+plt.ylabel("Prediksi")
+plt.title("Perbandingan Nilai Aktual vs Prediksi (Random Forest)")
+plt.legend()
+plt.show()
+```
+
+---
+
+### 7. Kesimpulan
+
+Dari tahap evaluasi, dapat dilihat bahwa model **Random Forest Regression** (setelah hyperparameter tuning) memberikan performa terbaik berdasarkan metrik R² serta tingkat error (MAE dan MSE) yang rendah. Model ini dapat dijadikan solusi untuk mendukung keputusan dalam mengoptimalkan input pertanian guna meningkatkan hasil panen padi di Jawa Barat.
+
+---
+
+### 8. Pengembangan Lebih Lanjut
+
+Beberapa usulan pengembangan tambahan:  
+- **Analisis Feature Importance:** Menentukan variabel mana yang paling berpengaruh terhadap prediksi hasil panen.  
+- **Cross Validation yang Lebih Mendalam:** Mengimplementasikan teknik validasi silang untuk menguji kestabilan model.  
+- **Penerapan Model Ensembel Lainnya:** Mencoba algoritma seperti Gradient Boosting atau XGBoost untuk perbandingan lebih lanjut.  
+- **Visualisasi Interaktif:** Menggunakan Plotly atau Bokeh untuk eksplorasi data lebih mendalam.
 
 ---

@@ -1,6 +1,6 @@
 ---
 
-## Laporan Proyek Machine Learning – [Nama Anda]  
+## Laporan Proyek Machine Learning – Tb Ulfah Nur Sya'baniah
 **Domain Proyek: Prediksi Hasil Panen Padi di Jawa Barat**
 
 ---
@@ -74,7 +74,7 @@ Setiap model akan dibandingkan berdasarkan metrik ini untuk memilih model terbai
 
 ### 6. Implementation di Google Colab
 
-Berikut adalah contoh kode lengkap yang dapat Anda gunakan di Google Colab.
+Berikut adalah contoh kode lengkap yang dapat digunakan di Google Colab.
 
 ---
 

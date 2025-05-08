@@ -90,16 +90,7 @@ Dalam tahap ini, kita mendefinisikan tujuan bisnis dan konteks strategis di mana
 
 ---
 
-### 2. Data Understanding
-
-Dataset yang digunakan dalam proyek ini merupakan basis data untuk prediksi hasil panen tanaman (crop yield). Dataset ini mencakup 10 fitur utama yang mewakili kondisi lingkungan, karakteristik tanah, dan input pertanian, yang semuanya berpotensi memengaruhi produktivitas tanaman. Data ini diperoleh dari Kaggle melalui tautan berikut:(https://www.kaggle.com/datasets/anshsinghal3107/crop-yield-prediction-dataset?select=data_core_with_yield.csv)
-
-Fitur-Fitur Utama dalam Dataset:
-Berikut adalah contoh bagian **Data Understanding** yang mencakup deskripsi lengkap serta sumber data:
-
----
-
-### Data Understanding
+### 3.Data Understanding
 
 Dataset yang digunakan dalam proyek ini merupakan basis data untuk prediksi hasil panen tanaman (crop yield). Dataset ini mencakup 10 fitur utama yang mewakili kondisi lingkungan, karakteristik tanah, dan input pertanian, yang semuanya berpotensi memengaruhi produktivitas tanaman.
 
@@ -150,12 +141,7 @@ Dataset diperoleh dari Kaggle, yaitu "Crop Yield Prediction Dataset" oleh anshsi
 
 ---
 
-### 3. Data Preparation
-Berikut adalah contoh bagian **Data Preparation** yang dapat kamu cantumkan dalam laporan proyek:
-
----
-
-### Data Preparation
+### 4. Data Preparation
 Pada tahap ini, fokus utama adalah membersihkan, mentransformasikan, dan menyiapkan dataset sehingga siap digunakan untuk proses pemodelan. Berikut adalah tahapan dan langkah-langkah yang dilakukan:
 1. Memuat Dataset
 2. Pemeriksaan dan Penanganan Data Hilang (Missing Values)
@@ -166,12 +152,7 @@ Pada tahap ini, fokus utama adalah membersihkan, mentransformasikan, dan menyiap
 
 ---
 
-### 4. Modeling
-Berikut adalah contoh bagian **Modeling** untuk proyek ini, yang mencakup pemilihan algoritma, pelatihan model, evaluasi, hingga hyperparameter tuning:
-
----
-
-### Modeling
+### 5. Modeling
 Pada tahap ini, fokus utama adalah membangun model prediktif menggunakan algoritma regresi untuk memprediksi *Crop Yield*. Pendekatan modeling mencakup:
 1. **Pemilihan Algoritma**
    - Baseline Model (Linear Regression)
@@ -189,7 +170,7 @@ Pada tahap ini, fokus utama adalah membangun model prediktif menggunakan algorit
    
 ---
 
-### 5. Evaluation
+### 6. Evaluation
 Di tahap evaluasi, mengukur seberapa baik model prediksi yang telah dibangun dalam menangkap hubungan antara variabel-variabel input dan hasil panen (*Crop Yield*). Evaluasi dilakukan menggunakan metrik kuantitatif serta analisis visual untuk memastikan bahwa model tidak hanya memiliki performa statistik yang baik, tetapi juga memenuhi kebutuhan bisnis dan operasional nyata.
 
 #### 1. Pengukuran Performa Model

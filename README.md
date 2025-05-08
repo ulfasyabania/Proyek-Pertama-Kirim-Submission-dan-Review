@@ -6,7 +6,7 @@
 
 ## **Prediksi Hasil Panen Optimal melalui Machine Learning**
 
-### 1. Latar Belakang
+## 1. Latar Belakang
 
 Di tengah transformasi digital yang merambah ke seluruh sektor, pertanian modern kini semakin mengandalkan data dan teknologi untuk mengambil keputusan strategis. Peningkatan produktivitas lahan dan efisiensi penggunaan input (seperti pupuk) merupakan tantangan besar, terutama ketika banyak faktor eksternal seperti kondisi iklim dan jenis tanah berperan secara simultan dalam menentukan hasil panen. Proyek ini hadir untuk menjawab tantangan tersebut melalui pengembangan model machine learning yang mampu memprediksi crop yield secara akurat.
 
@@ -17,6 +17,20 @@ Selain memberikan nilai prediktif secara numerik (misalnya, prediksi crop yield 
 Selain aspek teknis, proyek ini juga mendukung prinsip precision agriculture, suatu pendekatan modern yang mengintegrasikan input data real-time dan historis guna memberikan rekomendasi penanganan lahan yang paling optimal. Di era pertanian yang menghadapi dinamika perubahan iklim dan keterbatasan sumber daya, solusi berbasis machine learning menjadi alat bantu penting dalam pengambilan keputusan agroekonomi yang berkelanjutan.
 
 Dengan latar belakang inilah, proyek ini bertujuan menggabungkan data variabel iklim, tanah, dan input pupuk ke dalam satu model komprehensif yang tidak hanya meningkatkan akurasi prediksi hasil panen, tetapi juga memberikan dasar bagi strategi optimasi pertanian di masa depan.
+
+---
+
+## Referensi
+
+**Bhagat, D., Shah, S., & Gupta, R. K. (2024). _Crop Yield Prediction Using Machine Learning Approaches.**
+
+Makalah konferensi ini mengeksplorasi penggunaan beberapa model regresi seperti *Random Forest Regressor* dan *Linear Regression* dalam memprediksi hasil panen. Studi ini menguraikan langkah-langkah pengolahan data, proses seleksi fitur, serta evaluasi metrik performa (misalnya MAE, MSE, RMSE, dan R²). Temuan dari makalah ini membantu dalam mengoptimalkan model prediksi untuk aplikasi praktis di lapangan.
+
+*Sumber: [[SpringerLink – Link prosiding](https://link.springer.com/](https://link.springer.com/chapter/10.1007/978-3-031-62217-5_6]*
+
+---
+
+Anda dapat menyertakan bagian referensi ini dalam laporan atau dokumen Anda untuk menunjukkan sumber riset yang kredibel dan mendukung pendekatan prediksi hasil panen menggunakan machine learning. Jika perlu, sesuaikan tautan dan detail lain sesuai dengan format referensi yang diwajibkan oleh institusi atau jurnal Anda.
 
 ---
 
@@ -44,14 +58,9 @@ Dalam tahap ini, kita mendefinisikan tujuan bisnis dan konteks strategis di mana
    - **Rekomendasi Operasional:** Mendapatkan insight tentang kontribusi masing-masing variabel (seperti pengaruh pupuk, kondisi iklim, dan tipe tanah) guna memberikan rekomendasi yang dapat diimplementasikan secara langsung oleh para praktisi pertanian.  
    - **Dampak Bisnis Nyata:** Misalnya, pengurangan biaya operasional, peningkatan output pertanian, dan peningkatan profitabilitas berkat keputusan yang lebih terinformasi.
 
-5. **Strategi Implementasi dan Skalabilitas**  
-   - **Pengujian Lapangan:** Mengintegrasikan model dalam sistem percontohan (pilot project) di wilayah pertanian tertentu untuk menguji akurasi prediksi dan dampak rekomendasi secara langsung.  
-   - **Integrasi dengan Platform Digital:** Mengembangkan dashboard interaktif atau API yang memungkinkan akses real-time terhadap prediksi hasil panen dan insight lainnya.  
-   - **Update dan Monitoring Berkala:** Menetapkan mekanisme monitoring terhadap performa model secara berkelanjutan dengan data baru, agar solusi terus relevan dan adaptif terhadap perubahan kondisi lapangan.
-
 ---  
 
-**Solution Statements (Opsional):**  
+**Solution Statements:**  
 1. **Data Preprocessing dan Feature Engineering**  
    - **Pembersihan dan Transformasi Data:**  
      Langkah pertama adalah memastikan kualitas data dengan menangani nilai yang hilang dan outlier. Variabel kategorikal—seperti *Soil Type, Crop Type,* dan *Fertilizer Name*—di-encode menjadi format numerik, sedangkan fitur numerik (seperti *Temperature, Humidity, Moisture, Nitrogen, Potassium,* dan *Phosphorous*) dinormalisasi agar skala nilainya konsisten.  
@@ -90,7 +99,7 @@ Dalam tahap ini, kita mendefinisikan tujuan bisnis dan konteks strategis di mana
 
 ---
 
-### 3.Data Understanding
+## 3. Data Understanding
 
 Dataset yang digunakan dalam proyek ini merupakan basis data untuk prediksi hasil panen tanaman (crop yield). Dataset ini mencakup 10 fitur utama yang mewakili kondisi lingkungan, karakteristik tanah, dan input pertanian, yang semuanya berpotensi memengaruhi produktivitas tanaman.
 
@@ -141,7 +150,7 @@ Dataset diperoleh dari Kaggle, yaitu "Crop Yield Prediction Dataset" oleh anshsi
 
 ---
 
-### 4. Data Preparation
+## 4. Data Preparation
 Pada tahap ini, fokus utama adalah membersihkan, mentransformasikan, dan menyiapkan dataset sehingga siap digunakan untuk proses pemodelan. Berikut adalah tahapan dan langkah-langkah yang dilakukan:
 1. Memuat Dataset
 2. Pemeriksaan dan Penanganan Data Hilang (Missing Values)
@@ -152,7 +161,7 @@ Pada tahap ini, fokus utama adalah membersihkan, mentransformasikan, dan menyiap
 
 ---
 
-### 5. Modeling
+## 5. Modeling
 Pada tahap ini, fokus utama adalah membangun model prediktif menggunakan algoritma regresi untuk memprediksi *Crop Yield*. Pendekatan modeling mencakup:
 1. **Pemilihan Algoritma**
    - Baseline Model (Linear Regression)
@@ -170,7 +179,7 @@ Pada tahap ini, fokus utama adalah membangun model prediktif menggunakan algorit
    
 ---
 
-### 6. Evaluation
+## 6. Evaluation
 Di tahap evaluasi, mengukur seberapa baik model prediksi yang telah dibangun dalam menangkap hubungan antara variabel-variabel input dan hasil panen (*Crop Yield*). Evaluasi dilakukan menggunakan metrik kuantitatif serta analisis visual untuk memastikan bahwa model tidak hanya memiliki performa statistik yang baik, tetapi juga memenuhi kebutuhan bisnis dan operasional nyata.
 
 #### 1. Pengukuran Performa Model
@@ -197,7 +206,7 @@ Setelah mengumpulkan metrik evaluasi dan visualisasi, analisis hasil yang didapa
 
 ---
 
-### 7. Kesimpulan
+## 7. Kesimpulan
 Proyek ini berhasil membangun model **predictive analytics** untuk memprediksi hasil panen (*Crop Yield*) berdasarkan faktor agronomi, kondisi lingkungan, dan input pertanian. Melalui serangkaian tahapan mulai dari eksplorasi data (**Data Understanding**), pra-pemrosesan (**Data Preparation**), pemodelan (**Modeling**), hingga evaluasi (**Evaluation**), didapatkan wawasan mendalam tentang hubungan antara variabel seperti **temperature, humidity, moisture, jenis tanah, jenis tanaman, dan kandungan nutrisi** terhadap produktivitas pertanian.
 
 Hasil analisis menunjukkan bahwa model **Random Forest Regression** dengan **hyperparameter tuning** memberikan performa terbaik dibandingkan baseline model seperti **Linear Regression**, dengan **R² score yang lebih tinggi dan error lebih rendah**. Selain itu, teknik interpretasi model seperti **feature importance** membantu mengidentifikasi faktor yang paling berkontribusi terhadap hasil panen, yang dapat digunakan untuk **optimalisasi manajemen lahan dan rekomendasi pemupukan**.
@@ -211,7 +220,7 @@ Dengan pengembangan lebih lanjut, model ini berpotensi menjadi **alat strategis 
 
 ---
 
-### 8. Pengembangan Lebih Lanjut
+## 8. Pengembangan Lebih Lanjut
 Setelah proyek **Crop Yield Prediction** ini berhasil dikembangkan dan dievaluasi, ada beberapa area yang dapat diperluas untuk meningkatkan akurasi, skalabilitas, dan penerapan nyata dalam sektor pertanian. Berikut beberapa arah pengembangan lebih lanjut yang dapat dilakukan:
 
 #### **1. Peningkatan Model dan Teknik Machine Learning**

@@ -26,11 +26,7 @@ Dengan latar belakang inilah, proyek ini bertujuan menggabungkan data variabel i
 
 Makalah konferensi ini mengeksplorasi penggunaan beberapa model regresi seperti *Random Forest Regressor* dan *Linear Regression* dalam memprediksi hasil panen. Studi ini menguraikan langkah-langkah pengolahan data, proses seleksi fitur, serta evaluasi metrik performa (misalnya MAE, MSE, RMSE, dan R²). Temuan dari makalah ini membantu dalam mengoptimalkan model prediksi untuk aplikasi praktis di lapangan.
 
-*Sumber: [[SpringerLink – Link prosiding](https://link.springer.com/](https://link.springer.com/chapter/10.1007/978-3-031-62217-5_6]*
-
----
-
-Anda dapat menyertakan bagian referensi ini dalam laporan atau dokumen Anda untuk menunjukkan sumber riset yang kredibel dan mendukung pendekatan prediksi hasil panen menggunakan machine learning. Jika perlu, sesuaikan tautan dan detail lain sesuai dengan format referensi yang diwajibkan oleh institusi atau jurnal Anda.
+   *(Sumber: SpringerLink, [Link prosiding](https://link.springer.com/chapter/10.1007/978-3-031-62217-5_6))*
 
 ---
 

@@ -44,9 +44,8 @@ Dalam tahap ini, kita mendefinisikan tujuan bisnis dan konteks strategis di mana
    - Investor dan Perusahaan Teknologi Agrikultur yang berpotensi memanfaatkan solusi prediktif ini dalam skala yang lebih luas.
 
 3. **Problem Statement**  
-   - Bagaimana menentukan dosis dan jenis pupuk yang optimal agar setiap lahan mendapatkan perlakuan yang sesuai dengan kondisi tanah, iklim, dan jenis tanaman?  
-   - Bagaimana memanfaatkan variabel seperti temperatur, kelembapan, moisture, tipe tanah, dan kandungan nutrisi untuk memprediksi hasil panen secara akurat dan mendukung keputusan agronomi?  
-   - Bagaimana mengurangi pemborosan pada input pertanian dan meningkatkan efisiensi produksi melalui rekomendasi berbasis data?
+   - Bagaimana menentukan dosis dan jenis pupuk yang optimal agar setiap lahan mendapatkan perlakuan yang sesuai dengan kondisi tanah, iklim, dan jenis tanaman?
+   - Bagaimana memanfaatkan variabel seperti temperatur, kelembapan, moisture, tipe tanah, dan kandungan nutrisi untuk memprediksi hasil panen secara akurat dan mendukung keputusan agronomi?
 
 4. **Goals**  
    - **Model Prediktif Berkinerja Tinggi:** Mencapai metrik evaluasi yang memadai (misalnya, R² score tinggi dengan MAE/MSE rendah) sehingga model benar-benar representatif dalam memproyeksikan hasil panen.  

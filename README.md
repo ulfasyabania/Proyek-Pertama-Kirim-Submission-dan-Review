@@ -18,16 +18,9 @@ Selain aspek teknis, proyek ini juga mendukung prinsip precision agriculture, su
 
 Dengan latar belakang inilah, proyek ini bertujuan menggabungkan data variabel iklim, tanah, dan input pupuk ke dalam satu model komprehensif yang tidak hanya meningkatkan akurasi prediksi hasil panen, tetapi juga memberikan dasar bagi strategi optimasi pertanian di masa depan.
 
-## 2. Business Understanding
-
-Proyek prediksi hasil panen ini bertujuan menyelaraskan analisis data agronomi dengan kebutuhan nyata di sektor pertanian, guna meningkatkan efisiensi penggunaan input dan mengoptimalkan hasil produksi.
-
-Berikut adalah contoh bagian **Business Understanding** untuk proyek predictive analytics ini:
-
 ---
 
-### Business Understanding
-
+## 2. Business Understanding
 Dalam tahap ini, kita mendefinisikan tujuan bisnis dan konteks strategis di mana model machine learning akan diaplikasikan. Proyek prediksi hasil panen ini bertujuan menyelaraskan analisis data agronomi dengan kebutuhan nyata di sektor pertanian, guna meningkatkan efisiensi penggunaan input dan mengoptimalkan hasil produksi. Berikut adalah beberapa poin kunci yang mendasari pemahaman bisnis proyek ini:
 
 1. **Tujuan dan Manfaat Bisnis**  

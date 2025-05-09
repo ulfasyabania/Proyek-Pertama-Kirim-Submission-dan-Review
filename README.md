@@ -160,13 +160,82 @@ Dataset diperoleh dari Kaggle, yaitu "Crop Yield Prediction Dataset" oleh anshsi
 ---
 
 ## 4. Data Preparation
-Pada tahap ini, fokus utama adalah membersihkan, mentransformasikan, dan menyiapkan dataset sehingga siap digunakan untuk proses pemodelan. Berikut adalah tahapan dan langkah-langkah yang dilakukan:
-1. Memuat Dataset
-2. Pemeriksaan dan Penanganan Data Hilang (Missing Values)
-3. Pengecekan Tipe Data dan Pengubahan Tipe Data
-4. Encoding Variabel Kategorikal
-5. Normalisasi/Standarisasi Fitur Numerik
-6. Membagi Dataset Menjadi Training dan Testing Set
+Tujuan utama pada tahap Data Preparation adalah untuk membersihkan, mentransformasikan, dan menyiapkan dataset sehingga siap untuk proses pemodelan. Pada tahap ini, kita memastikan bahwa data yang akan digunakan adalah bersih, terstruktur, dan konsisten. Perlu dicatat bahwa proses-proses seperti memuat dataset dan pemeriksaan eksploratori dasar telah dilakukan pada tahap Data Understanding. Di sini, fokus kita adalah pada transformasi dan penyempurnaan data sehingga dapat mendukung pembangunan model secara efektif.
+
+Dataset yang digunakan (yaitu, *data_core_with_yield.csv*) memiliki **8000 baris dan 30 kolom**. Informasi ini penting karena menunjukkan skala data yang dihadapi dan memastikan bahwa langkah-langkah preparasi diterapkan secara konsisten pada seluruh dataset.
+
+### Langkah-Langkah Data Preparation
+
+1. **Pemeriksaan dan Penanganan Data Hilang / Outlier**  
+   Alasan: Nilai yang hilang atau tidak konsisten dapat menyebabkan bias saat pelatihan model dan mengganggu algoritma pembelajaran.  
+   Langkah:  
+   ```python
+   # Melihat jumlah nilai null pada masing-masing kolom
+   print(df.isnull().sum())
+   # Jika ada missing value, misalnya dapat di-impute menggunakan metode forward fill:
+   # df = df.fillna(method='ffill')
+   ```
+   
+2. **Pengecekan Tipe Data dan Konversi**  
+   Alasan: Pastikan setiap kolom memiliki tipe data yang sesuai agar proses numerik (misalnya scaling) dan analisis berjalan lancar.  
+   Langkah:  
+   ```python
+   print(df.dtypes)
+   # Jika diperlukan, misalnya:
+   # df['Crop Yield'] = pd.to_numeric(df['Crop Yield'], errors='coerce')
+   ```
+
+3. **Encoding Variabel Kategorikal**  
+   Alasan: Variabel kategorikal (seperti *Soil Type*, *Crop Type*, dan *Fertilizer Name*) perlu dikonversi ke format numerik agar model dapat memprosesnya—tanpa mengasumsikan adanya urutan (ordinalitas) yang tidak relevan.  
+   Langkah:  
+   ```python
+   df = pd.get_dummies(df, columns=['Soil Type', 'Crop Type', 'Fertilizer Name'])
+   ```
+   
+4. **Normalisasi/Standarisasi Fitur Numerik**  
+   Alasan: Fitur numerik seperti *Temperature*, *Humidity*, *Moisture*, dan nilai nutrisi memiliki skala yang berbeda-beda. Menggunakan StandardScaler membantu mengubahnya ke rentang yang serupa, sehingga model tidak condong pada fitur-fitur dengan nilai yang lebih besar.  
+   Langkah:
+   ```python
+   from sklearn.preprocessing import StandardScaler
+
+   num_cols = ['Temparature', 'Humidity', 'Moisture', 'Nitrogen', 'Potassium', 'Phosphorous']
+   scaler = StandardScaler()
+   df[num_cols] = scaler.fit_transform(df[num_cols])
+   ```
+
+5. **Pembagian Dataset Menjadi Training dan Testing Set**  
+   Alasan: Untuk mengevaluasi generalisasi model, dataset dibagi menjadi data pelatihan (untuk melatih model) dan data pengujian (untuk mengecek performa pada data yang belum terlihat oleh model).  
+   Langkah:
+   ```python
+   from sklearn.model_selection import train_test_split
+
+   X = df.drop('Crop Yield', axis=1)
+   y = df['Crop Yield']
+
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+   print("Training set shape:", X_train.shape)
+   print("Test set shape:", X_test.shape)
+   ```
+---
+
+### Alasan Teknik Data Preparation
+
+- **Penanganan Missing Value / Outlier:**  
+  Untuk memastikan bahwa model tidak mendapatkan input yang tidak lengkap atau ekstrem yang dapat mengganggu proses pembelajaran, sehingga validitas dan keakuratan prediksi dapat dijamin.
+
+- **Konversi Tipe Data:**  
+  Transformasi tipe data diperlukan agar fungsi-fungsi matematis dan algoritma pembelajaran dapat dijalankan tanpa error, serta memastikan konsistensi data.
+
+- **Encoding Variabel Kategorikal:**  
+  One-Hot Encoding digunakan untuk menghindari kesalahan dalam interpretasi model terhadap variabel nominal. Dengan mengonversi ke format numerik, setiap kategori diperlakukan secara independen.
+
+- **Normalisasi/Standarisasi:**  
+  Mengurangi perbedaan skala antar fitur memudahkan model dalam menemukan pola dan mengoptimalkan proses training.
+
+- **Pembagian Dataset:**  
+  Pemisahan data secara eksplisit memastikan bahwa evaluasi model dilakukan terhadap data baru yang belum pernah dilihat sebelumnya, sehingga mencerminkan performa model di dunia nyata.
+
+Tahapan-tahapan di atas memastikan bahwa dataset siap digunakan untuk proses pemodelan, sehingga model yang dikembangkan dapat memberikan prediksi yang akurat dan reliable. Proses ini juga mendokumentasikan langkah-langkah penting untuk menjamin bahwa data yang masuk ke model terjaga konsistensinya, yang pada akhirnya mendukung keputusan strategis berbasis data.
 
 ---
 

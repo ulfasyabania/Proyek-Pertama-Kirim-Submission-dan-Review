@@ -397,7 +397,9 @@ $$
   R² Score mengukur proporsi variansi pada target yang berhasil dijelaskan oleh model. Nilai yang mendekati 1 berarti model menjelaskan sebagian besar variasi data.  
   **Rumus:**
   
-The coefficient of determination, \( R^2 \), is defined as \( R^2 = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2} \).
+$$
+R^2 = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
+$$
 
   *Contoh:* Dengan nilai R² dari 0.93, model Linear Regression dapat menjelaskan 93% variasi data.
 

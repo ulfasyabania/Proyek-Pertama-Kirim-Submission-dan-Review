@@ -186,7 +186,7 @@ Dataset yang digunakan (yaitu, *data_core_with_yield.csv*) memiliki **8000 baris
    ```
 
 3. **Encoding Variabel Kategorikal**  
-   Alasan: Variabel kategorikal (seperti *Soil Type*, *Crop Type*, dan *Fertilizer Name*) perlu dikonversi ke format numerik agar model dapat memprosesnya—tanpa mengasumsikan adanya urutan (ordinalitas) yang tidak relevan.  
+   Alasan: Variabel kategorikal (seperti *Soil Type*, *Crop Type*, dan *Fertilizer Name*) perlu dikonversi ke format numerik agar model dapat memprosesnya tanpa mengasumsikan adanya urutan (ordinalitas) yang tidak relevan.  
    Langkah:  
    ```python
    df = pd.get_dummies(df, columns=['Soil Type', 'Crop Type', 'Fertilizer Name'])

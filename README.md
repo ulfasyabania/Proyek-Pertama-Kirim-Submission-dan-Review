@@ -97,6 +97,21 @@ Dalam tahap ini, kita mendefinisikan tujuan bisnis dan konteks strategis di mana
 
 Dataset yang digunakan dalam proyek ini merupakan basis data untuk prediksi hasil panen tanaman (crop yield). Dataset ini mencakup 10 fitur utama yang mewakili kondisi lingkungan, karakteristik tanah, dan input pertanian, yang semuanya berpotensi memengaruhi produktivitas tanaman.
 
+**Detail struktur data:**
+
+- **Jumlah Baris:** 8000  
+- **Jumlah Kolom:** 30 
+
+Proses verifikasi jumlah data dapat dilakukan dengan cara berikut:
+
+```python
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/ulfasyabania/Proyek-Pertama-Kirim-Submission-dan-Review/refs/heads/main/data_core_with_yield.csv"
+
+print("Dataset shape:", df.shape)
+```
+
 **Fitur-Fitur Utama dalam Dataset:**
 - **Temparature:**  
   Mewakili suhu lingkungan (dalam °C) yang dapat memengaruhi proses metabolisme dan pertumbuhan tanaman.

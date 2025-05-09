@@ -357,16 +357,81 @@ Pada tahap tuning, grid parameter digunakan untuk menguji kombinasi yang berbeda
 ---
 
 ## 6. Evaluation
-Di tahap evaluasi, mengukur seberapa baik model prediksi yang telah dibangun dalam menangkap hubungan antara variabel-variabel input dan hasil panen (*Crop Yield*). Evaluasi dilakukan menggunakan metrik kuantitatif serta analisis visual untuk memastikan bahwa model tidak hanya memiliki performa statistik yang baik, tetapi juga memenuhi kebutuhan bisnis dan operasional nyata.
+Pada tahap evaluasi, mengukur seberapa baik model prediktif dalam menangkap hubungan antara variabel-variabel input dan target (*Crop Yield*). Evaluasi dilakukan dengan menggunakan metrik regresi yang umum, yaitu Mean Absolute Error (MAE), Mean Squared Error (MSE), Root Mean Squared Error (RMSE), dan R² Score. Berikut penjelasan dan formulanya:
 
-#### 1. Pengukuran Performa Model
-Gunakan metrik evaluasi fokus untuk masalah regresi, antara lain:
-- Mean Absolute Error (MAE)
-- Mean Squared Error (MSE)
-- Root Mean Squared Error (RMSE)
-- R² Score
+#### 1. Metrik Evaluasi dan Formula
+
+- **Mean Absolute Error (MAE):**
+
+  MAE mengukur rata-rata perbedaan absolut antara nilai prediksi dan nilai aktual.  
+  **Rumus:**  
+  \[
+  MAE = \frac{1}{n}\sum_{i=1}^{n} \left| y_i - \hat{y}_i \right|
+  \]
+  *Contoh:* Pada model Linear Regression, MAE yang diperoleh adalah 420.32, yang berarti rata-rata kesalahan prediksi adalah sekitar 420.32 unit.
+
+- **Mean Squared Error (MSE):**
+
+  MSE mengukur rata-rata kuadrat selisih antara nilai aktual dan prediksi. Metrik ini memberikan penalti yang lebih tinggi pada error yang besar.  
+  **Rumus:**  
+  \[
+  MSE = \frac{1}{n}\sum_{i=1}^{n} \left( y_i - \hat{y}_i \right)^2
+  \]
+  *Contoh:* Model Linear Regression menghasilkan MSE sekitar 296193.51.
+
+- **Root Mean Squared Error (RMSE):**
+
+  RMSE merupakan akar kuadrat dari MSE sehingga nilai yang dihasilkan berada pada satuan yang sama dengan target.  
+  **Rumus:**  
+  \[
+  RMSE = \sqrt{MSE}
+  \]
+
+- **R² Score:**
+
+  R² Score mengukur proporsi variansi pada target yang berhasil dijelaskan oleh model. Nilai yang mendekati 1 berarti model menjelaskan sebagian besar variasi data.  
+  **Rumus:**  
+  \[
+  R^2 = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
+  \]
+  *Contoh:* Dengan nilai R² dari 0.93, model Linear Regression dapat menjelaskan 93% variasi data.
+
+#### 2. Contoh Kode Evaluasi
+
+Berikut adalah implementasi kode evaluasi yang digunakan:
+
+```python
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
+
+# Misalkan y_test adalah nilai aktual dan y_pred_best hasil prediksi dari model terbaik
+mae = mean_absolute_error(y_test, y_pred_best)
+mse = mean_squared_error(y_test, y_pred_best)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, y_pred_best)
+
+print("Evaluasi Model Terbaik:")
+print(f"MAE: {mae:.2f}")
+print(f"MSE: {mse:.2f}")
+print(f"RMSE: {rmse:.2f}")
+print(f"R² Score: {r2:.2f}")
+```
+
+#### 3. Hasil Evaluasi dan Interpretasi
+
+Sebagai contoh, pada model baseline Linear Regression diperoleh:
+- **MAE:** 420.32  
+  Rata-rata kesalahan prediksi sebesar 420.32 unit menunjukkan seberapa besar penyimpangan secara absolut antara nilai aktual dengan prediksi.
+- **MSE:** 296193.51  
+  Nilai MSE yang tinggi menunjukkan bahwa prediksi yang sangat meleset mendapatkan penalti lebih besar.
+- **R² Score:** 0.93  
+  Ini berarti model mampu menjelaskan 93% variansi pada *Crop Yield*, yang mengindikasikan bahwa model prediktif cukup andal.
+
+Interpretasi metrik ini memberikan dasar yang kuat dalam menilai kualitas model:  
+- Error yang masuk akal (MAE dan RMSE) dan nilai R² yang tinggi menunjukkan bahwa model mampu menangkap pola utama pada data.  
+- Penjelasan lengkap mengenai rumus dari masing-masing metrik juga memudahkan pembaca untuk memahami bagaimana setiap error dihitung, sehingga meningkatkan kredibilitas analisis.
 - 
-#### 2. Visualisasi Hasil Prediksi
+#### 4. Visualisasi Hasil Prediksi
 - **Scatter Plot:**  
   Membandingkan nilai aktual versus nilai prediksi agar bisa melihat apakah model cenderung underestimasi atau overestimasi dalam rentang tertentu.
 - **Residual Plot:**  
@@ -384,9 +449,32 @@ Setelah mengumpulkan metrik evaluasi dan visualisasi, analisis hasil yang didapa
 ---
 
 ## 7. Kesimpulan
-Proyek ini berhasil membangun model **predictive analytics** untuk memprediksi hasil panen (*Crop Yield*) berdasarkan faktor agronomi, kondisi lingkungan, dan input pertanian. Melalui serangkaian tahapan mulai dari eksplorasi data (**Data Understanding**), pra-pemrosesan (**Data Preparation**), pemodelan (**Modeling**), hingga evaluasi (**Evaluation**), didapatkan wawasan mendalam tentang hubungan antara variabel seperti **temperature, humidity, moisture, jenis tanah, jenis tanaman, dan kandungan nutrisi** terhadap produktivitas pertanian.
+Proyek **Prediksi Hasil Panen Optimal** telah berhasil mengembangkan dan mengevaluasi model machine learning menggunakan dua pendekatan utama: **Linear Regression** dan **Random Forest Regression**, dengan optimasi melalui **GridSearchCV**.
 
-Hasil analisis menunjukkan bahwa model **Random Forest Regression** dengan **hyperparameter tuning** memberikan performa terbaik dibandingkan baseline model seperti **Linear Regression**, dengan **R² score yang lebih tinggi dan error lebih rendah**. Selain itu, teknik interpretasi model seperti **feature importance** membantu mengidentifikasi faktor yang paling berkontribusi terhadap hasil panen, yang dapat digunakan untuk **optimalisasi manajemen lahan dan rekomendasi pemupukan**.
+**Hasil Evaluasi Model:**
+- **Linear Regression:**  
+  - **MAE:** 420.32  
+  - **MSE:** 296193.51  
+  - **R² Score:** 0.93  
+
+- **Random Forest Regression (Baseline):**  
+  - **MAE:** 430.11  
+  - **MSE:** 324300.15  
+  - **R² Score:** 0.92  
+
+- **Random Forest Regression (Optimized with GridSearchCV):**  
+  - **Best Parameters:** `{'max_depth': 10, 'min_samples_leaf': 2, 'min_samples_split': 5, 'n_estimators': 200}`  
+  - **MAE:** 426.08  
+  - **MSE:** 311815.73  
+  - **R² Score:** 0.92  
+
+Dari hasil tersebut, **Linear Regression** menunjukkan performa sedikit lebih baik dibandingkan model **Random Forest**, terutama dari segi **MSE yang lebih rendah dan R² score yang lebih tinggi**. Model regresi linier cukup mampu menangkap pola prediksi dengan baik, tetapi model ensemble seperti Random Forest lebih fleksibel dalam menangani hubungan non-linear dan interaksi fitur.
+
+**Insight dan Rekomendasi:**
+- Model **Linear Regression** memberikan hasil yang baik, namun mungkin terbatas dalam menangkap pola hubungan kompleks antar variabel agronomi.  
+- **Random Forest Regression** memberikan hasil yang stabil dan dapat ditingkatkan dengan lebih banyak data atau fitur tambahan seperti data historis cuaca atau sistem irigasi.  
+- **Optimasi Hyperparameter pada Random Forest** membantu meningkatkan akurasi, tetapi belum mampu melampaui hasil dari model linier.  
+- Perlu dilakukan **eksplorasi lebih lanjut terhadap fitur yang paling berpengaruh**, seperti kandungan nitrogen dan kelembapan tanah, untuk meningkatkan model prediksi.  
 
 Dari evaluasi model dan analisis residual, dapat disimpulkan bahwa meskipun model mampu menangkap pola prediksi dengan cukup baik, masih terdapat beberapa **area untuk penyempurnaan**, seperti:
 - **Penambahan fitur lain yang lebih spesifik**, seperti pola cuaca historis atau kondisi irigasi untuk meningkatkan akurasi prediksi.
@@ -437,4 +525,3 @@ Setelah proyek **Crop Yield Prediction** ini berhasil dikembangkan dan dievaluas
 Dengan pengembangan lebih lanjut ini, proyek prediksi hasil panen tidak hanya akan membantu petani dalam meningkatkan efisiensi dan produktivitas, tetapi juga berkontribusi dalam **ketahanan pangan, keberlanjutan ekosistem pertanian, dan adaptasi terhadap perubahan iklim**. 
 
 ---
-

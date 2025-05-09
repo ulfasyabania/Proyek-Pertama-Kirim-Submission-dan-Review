@@ -57,7 +57,7 @@ Dalam tahap ini, kita mendefinisikan tujuan bisnis dan konteks strategis di mana
 **Solution Statements:**  
 1. **Data Preprocessing dan Feature Engineering**  
    - **Pembersihan dan Transformasi Data:**  
-     Langkah pertama adalah memastikan kualitas data dengan menangani nilai yang hilang dan outlier. Variabel kategorikal—seperti *Soil Type, Crop Type,* dan *Fertilizer Name*—di-encode menjadi format numerik, sedangkan fitur numerik (seperti *Temperature, Humidity, Moisture, Nitrogen, Potassium,* dan *Phosphorous*) dinormalisasi agar skala nilainya konsisten.  
+     Langkah pertama adalah memastikan kualitas data dengan menangani nilai yang hilang dan outlier. Variabel kategorikal seperti *Soil Type, Crop Type,* dan *Fertilizer Name* di-encode menjadi format numerik, sedangkan fitur numerik (seperti *Temperature, Humidity, Moisture, Nitrogen, Potassium,* dan *Phosphorous*) dinormalisasi agar skala nilainya konsisten.  
    - **Pembuatan Fitur Tambahan:**  
      Jika diperlukan, dapat dikembangkan fitur baru (misalnya, indeks kesuburan tanah yang merupakan kombinasi nilai nutrisi) guna menangkap informasi yang lebih mendalam dari data mentah.  
    

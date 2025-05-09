@@ -364,36 +364,43 @@ Pada tahap evaluasi, mengukur seberapa baik model prediktif dalam menangkap hubu
 - **Mean Absolute Error (MAE):**
 
   MAE mengukur rata-rata perbedaan absolut antara nilai prediksi dan nilai aktual.  
-  **Rumus:**  
-  \[
-  MAE = \frac{1}{n}\sum_{i=1}^{n} \left| y_i - \hat{y}_i \right|
-  \]
+  **Rumus:**
+  
+$$
+MAE = \frac{1}{n}\sum_{i=1}^{n} \left| y_i - \hat{y}_i \right|
+$$
+
   *Contoh:* Pada model Linear Regression, MAE yang diperoleh adalah 420.32, yang berarti rata-rata kesalahan prediksi adalah sekitar 420.32 unit.
 
 - **Mean Squared Error (MSE):**
 
   MSE mengukur rata-rata kuadrat selisih antara nilai aktual dan prediksi. Metrik ini memberikan penalti yang lebih tinggi pada error yang besar.  
-  **Rumus:**  
-  \[
-  MSE = \frac{1}{n}\sum_{i=1}^{n} \left( y_i - \hat{y}_i \right)^2
-  \]
+  **Rumus:**
+    
+$$
+MSE = \frac{1}{n}\sum_{i=1}^{n} \left( y_i - \hat{y}_i \right)^2
+$$
+
   *Contoh:* Model Linear Regression menghasilkan MSE sekitar 296193.51.
 
 - **Root Mean Squared Error (RMSE):**
 
   RMSE merupakan akar kuadrat dari MSE sehingga nilai yang dihasilkan berada pada satuan yang sama dengan target.  
-  **Rumus:**  
-  \[
-  RMSE = \sqrt{MSE}
-  \]
+  **Rumus:**
+  
+$$
+RMSE = \sqrt{MSE}
+$$
 
 - **R² Score:**
 
   R² Score mengukur proporsi variansi pada target yang berhasil dijelaskan oleh model. Nilai yang mendekati 1 berarti model menjelaskan sebagian besar variasi data.  
-  **Rumus:**  
-  \[
-  R^2 = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
-  \]
+  **Rumus:**
+  
+$$
+R^2 = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
+$$
+
   *Contoh:* Dengan nilai R² dari 0.93, model Linear Regression dapat menjelaskan 93% variasi data.
 
 #### 2. Contoh Kode Evaluasi
@@ -437,10 +444,10 @@ Interpretasi metrik ini memberikan dasar yang kuat dalam menilai kualitas model:
 - **Residual Plot:**  
   Menganalisis sebaran residual (selisih antara nilai aktual dan nilai prediksi) untuk memastikan tidak terdapat pola sistematik. Distribusi residual yang acak dan simetris merupakan indikasi model yang baik.
 
-#### 3. Cross-Validation
+#### 5. Cross-Validation
 Untuk memastikan model yang dibangun memiliki performa yang konsisten dan generalisasi yang baik, lakukan evaluasi dengan cross-validation (misalnya, K-Fold Cross Validation). Teknik ini membagi data menjadi beberapa subset sehingga model diuji secara bergantian pada bagian data yang berbeda.
 
-#### 4. Analisis Hasil dan Interpretasi
+#### 6. Analisis Hasil dan Interpretasi
 Setelah mengumpulkan metrik evaluasi dan visualisasi, analisis hasil yang didapat untuk:
 - Memastikan error yang dihasilkan masuk akal secara domain (misalnya, apakah error masuk akal jika dibandingkan dengan variasi alami hasil panen).
 - Menentukan apakah terdapat bias tertentu atau pola error yang menunjukkan kebutuhan untuk penyempurnaan fitur atau model.

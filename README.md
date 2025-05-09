@@ -167,7 +167,7 @@ Dataset yang digunakan (yaitu, *data_core_with_yield.csv*) memiliki **8000 baris
 ### Langkah-Langkah Data Preparation
 
 1. **Pemeriksaan dan Penanganan Data Hilang / Outlier**  
-   Alasan: Nilai yang hilang atau tidak konsisten dapat menyebabkan bias saat pelatihan model dan mengganggu algoritma pembelajaran.  
+   Nilai yang hilang atau tidak konsisten dapat menyebabkan bias saat pelatihan model dan mengganggu algoritma pembelajaran.  
    Langkah:  
    ```python
    # Melihat jumlah nilai null pada masing-masing kolom
@@ -177,7 +177,7 @@ Dataset yang digunakan (yaitu, *data_core_with_yield.csv*) memiliki **8000 baris
    ```
    
 2. **Pengecekan Tipe Data dan Konversi**  
-   Alasan: Pastikan setiap kolom memiliki tipe data yang sesuai agar proses numerik (misalnya scaling) dan analisis berjalan lancar.  
+   Pastikan setiap kolom memiliki tipe data yang sesuai agar proses numerik (misalnya scaling) dan analisis berjalan lancar.  
    Langkah:  
    ```python
    print(df.dtypes)
@@ -186,14 +186,14 @@ Dataset yang digunakan (yaitu, *data_core_with_yield.csv*) memiliki **8000 baris
    ```
 
 3. **Encoding Variabel Kategorikal**  
-   Alasan: Variabel kategorikal (seperti *Soil Type*, *Crop Type*, dan *Fertilizer Name*) perlu dikonversi ke format numerik agar model dapat memprosesnya tanpa mengasumsikan adanya urutan (ordinalitas) yang tidak relevan.  
+   Variabel kategorikal (seperti *Soil Type*, *Crop Type*, dan *Fertilizer Name*) perlu dikonversi ke format numerik agar model dapat memprosesnya tanpa mengasumsikan adanya urutan (ordinalitas) yang tidak relevan.  
    Langkah:  
    ```python
    df = pd.get_dummies(df, columns=['Soil Type', 'Crop Type', 'Fertilizer Name'])
    ```
    
 4. **Normalisasi/Standarisasi Fitur Numerik**  
-   Alasan: Fitur numerik seperti *Temperature*, *Humidity*, *Moisture*, dan nilai nutrisi memiliki skala yang berbeda-beda. Menggunakan StandardScaler membantu mengubahnya ke rentang yang serupa, sehingga model tidak condong pada fitur-fitur dengan nilai yang lebih besar.  
+   Fitur numerik seperti *Temperature*, *Humidity*, *Moisture*, dan nilai nutrisi memiliki skala yang berbeda-beda. Menggunakan StandardScaler membantu mengubahnya ke rentang yang serupa, sehingga model tidak condong pada fitur-fitur dengan nilai yang lebih besar.  
    Langkah:
    ```python
    from sklearn.preprocessing import StandardScaler
@@ -204,7 +204,7 @@ Dataset yang digunakan (yaitu, *data_core_with_yield.csv*) memiliki **8000 baris
    ```
 
 5. **Pembagian Dataset Menjadi Training dan Testing Set**  
-   Alasan: Untuk mengevaluasi generalisasi model, dataset dibagi menjadi data pelatihan (untuk melatih model) dan data pengujian (untuk mengecek performa pada data yang belum terlihat oleh model).  
+   Untuk mengevaluasi generalisasi model, dataset dibagi menjadi data pelatihan (untuk melatih model) dan data pengujian (untuk mengecek performa pada data yang belum terlihat oleh model).  
    Langkah:
    ```python
    from sklearn.model_selection import train_test_split
@@ -240,20 +240,119 @@ Tahapan-tahapan di atas memastikan bahwa dataset siap digunakan untuk proses pem
 ---
 
 ## 5. Modeling
-Pada tahap ini, fokus utama adalah membangun model prediktif menggunakan algoritma regresi untuk memprediksi *Crop Yield*. Pendekatan modeling mencakup:
-1. **Pemilihan Algoritma**
-   - Baseline Model (Linear Regression)
-   - Model Non-linear dan Ensemble
-2. **Pelatihan Model dan Evaluasi Awal**
-   Pertama, bagi data menjadi set pelatihan dan pengujian (seperti sudah dipersiapkan pada Data Preparation) dan kemudian latih model. Evaluasi awal dilakukan menggunakan metrik seperti Mean Absolute Error (MAE), Mean Squared Error (MSE), dan R² Score untuk mengukur performa model.
-3. **Eksperimen dengan Model Alternatif**
-   Percobaan dengan model ensemble seperti Random Forest dapat memberikan peningkatan performa.
-4. **Hyperparameter Tuning**
-   Untuk memastikan model tidak overfitting dan mendapatkan konfigurasi terbaik, lakukan hyperparameter tuning menggunakan GridSearchCV atau RandomizedSearchCV.
-5. **Evaluasi dan Visualisasi**
-   Selain metrik evaluasi, visualisasi hasil prediksi versus nilai aktual serta analisis residual sangat penting untuk memastikan tidak terdapat pola bias yang tersisa.
-6. **Interpretabilitas Model (Opsional)**
-   Untuk mendapatkan insight lebih mendalam mengenai kontribusi masing-masing fitur, gunakan teknik interpretasi seperti feature importance atau SHAP.
+Pada tahap ini, membangun model prediktif untuk memprediksi *Crop Yield* berdasarkan variabel-variabel input (misalnya, temperatur, kelembapan, moisture, tipe tanah, dan kandungan nutrisi). Proses modeling dimulai dari pembuatan model baseline hingga eksperimen dengan model yang lebih kompleks menggunakan pendekatan ensemble. Di bawah ini dijelaskan cara kerja masing-masing algoritma dan parameter yang digunakan.
+
+#### 1. Baseline Model: Linear Regression
+
+**Cara Kerja:**  
+Model Linear Regression berupaya menemukan hubungan linear antara variabel independen (input) dan variabel dependen (target) dengan meminimalkan jumlah kesalahan kuadrat (least squares). Model ini menghitung koefisien (bobot) untuk setiap fitur sehingga prediksi merupakan kombinasi linear dari fitur-fitur tersebut. Dalam implementasi scikit-learn, algoritma ini berjalan dengan parameter default tanpa regularisasi tambahan.
+
+**Parameter:**  
+- **fit_intercept** (default: `True`): Model secara otomatis menghitung intercept (bias).  
+- **normalize** (default: `False`): Skalasi input tidak dilakukan secara otomatis karena sudah melakukan scaling sebelumnya.  
+- **n_jobs** (default: `None`): Tidak menggunakan paralelisasi.
+
+**Kode Implementasi Linear Regression:**
+
+```python
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+# Membuat dan melatih model Linear Regression dengan parameter default
+lr = LinearRegression()  # fit_intercept=True, normalize=False by default
+lr.fit(X_train, y_train)
+
+# Melakukan prediksi pada data testing
+y_pred_lr = lr.predict(X_test)
+
+# Evaluasi performa model (ini mencakup perhitungan MAE, MSE, dan R²)
+mae_lr = mean_absolute_error(y_test, y_pred_lr)
+mse_lr = mean_squared_error(y_test, y_pred_lr)
+r2_lr = r2_score(y_test, y_pred_lr)
+
+print("Linear Regression Performance:")
+print(f"MAE: {mae_lr:.2f}, MSE: {mse_lr:.2f}, R2 Score: {r2_lr:.2f}")
+```
+
+Dalam model ini, parameter default sudah mencukupi untuk membangun baseline. Karena model linear relatif sederhana, hasilnya juga memberikan gambaran awal kapan perlu berpindah ke model yang lebih kompleks.
+
+#### 2. Model Ensemble: Random Forest Regressor
+
+**Cara Kerja:**  
+Random Forest Regression merupakan algoritma ensemble yang menggabungkan banyak pohon keputusan (decision trees) dan mengambil rata-rata (untuk regresi) dari prediksi masing-masing pohon. Setiap pohon dibangun dengan subset data acak (bagging) dan subset fitur acak, sehingga membantu mengurangi overfitting dan meningkatkan generalisasi. Model ini dapat menangkap hubungan non-linear antar fitur secara efektif.
+
+**Parameter Utama dan Nilai Default:**
+- **n_estimators** (default: `100`): Jumlah pohon yang dibangun. Dalam eksperimen, nilai ini dapat dioptimalkan (misalnya, 100 atau 200).
+- **max_depth** (default: `None`): Tidak ada batasan kedalaman pohon, namun, membatasi kedalaman (misalnya, 10 atau 20) dapat mencegah overfitting.
+- **min_samples_split** (default: `2`): Jumlah minimum sampel untuk membagi node.
+- **min_samples_leaf** (default: `1`): Jumlah minimum sampel di setiap daun.
+- **random_state**: Digunakan untuk reproduksibilitas (misalnya, `42`).
+
+**Kode Implementasi Random Forest (dengan parameter default dan tuning):**
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+
+# Membuat dan melatih model Random Forest dengan parameter default (kecuali random_state)
+rf = RandomForestRegressor(random_state=42)
+rf.fit(X_train, y_train)
+
+# Prediksi dan evaluasi Random Forest
+y_pred_rf = rf.predict(X_test)
+mae_rf = mean_absolute_error(y_test, y_pred_rf)
+mse_rf = mean_squared_error(y_test, y_pred_rf)
+r2_rf = r2_score(y_test, y_pred_rf)
+
+print("Random Forest Performance (Default Parameters):")
+print(f"MAE: {mae_rf:.2f}, MSE: {mse_rf:.2f}, R2 Score: {r2_rf:.2f}")
+```
+
+Untuk memastikan model terbaik, dilakukan hyperparameter tuning guna mencari konfigurasi optimal.
+
+**Hyperparameter Tuning dengan GridSearchCV:**
+
+```python
+from sklearn.model_selection import GridSearchCV
+
+# Menentukan grid parameter untuk Random Forest
+param_grid = {
+    'n_estimators': [100, 200],
+    'max_depth': [10, 20, None],
+    'min_samples_split': [2, 5],
+    'min_samples_leaf': [1, 2]
+}
+
+grid_rf = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, scoring='r2', n_jobs=-1)
+grid_rf.fit(X_train, y_train)
+
+print("Best parameters for Random Forest:", grid_rf.best_params_)
+
+# Menggunakan model terbaik dari hasil tuning
+best_rf = grid_rf.best_estimator_
+y_pred_best = best_rf.predict(X_test)
+mae_best = mean_absolute_error(y_test, y_pred_best)
+mse_best = mean_squared_error(y_test, y_pred_best)
+r2_best = r2_score(y_test, y_pred_best)
+
+print("Best Random Forest Performance:")
+print(f"MAE: {mae_best:.2f}, MSE: {mse_best:.2f}, R2 Score: {r2_best:.2f}")
+```
+
+**Penjelasan Tuning:**  
+Pada tahap tuning, grid parameter digunakan untuk menguji kombinasi yang berbeda dari *n_estimators*, *max_depth*, *min_samples_split*, dan *min_samples_leaf*.  
+- **n_estimators:** Menentukan banyaknya pohon dalam ensemble, yang dapat mempengaruhi kestabilan prediksi.  
+- **max_depth:** Membatasi kedalaman pohon membantu mencegah overfitting.  
+- **min_samples_split** dan **min_samples_leaf:** Menjamin bahwa setiap pembagian decision tree tidak terlalu spesifik terhadap data pelatihan sehingga meningkatkan generalisasi.
+
+---
+
+### Kesimpulan Modeling
+
+- **Linear Regression:**  
+  Digunakan sebagai model baseline dengan parameter default. Cara kerjanya yang sederhana dan interpretabilitas tinggi menjadikannya acuan awal untuk mengukur performa model prediksi.
+  
+- **Random Forest Regression:**  
+  Model ensemble yang menangkap hubungan non-linear secara efektif. Dengan mengoptimalkan parameter utama melalui GridSearchCV, model ini dapat meningkatkan akurasi prediksi *Crop Yield* dan dapat mengatasi variabilitas data pertanian.
    
 ---
 
@@ -338,3 +437,4 @@ Setelah proyek **Crop Yield Prediction** ini berhasil dikembangkan dan dievaluas
 Dengan pengembangan lebih lanjut ini, proyek prediksi hasil panen tidak hanya akan membantu petani dalam meningkatkan efisiensi dan produktivitas, tetapi juga berkontribusi dalam **ketahanan pangan, keberlanjutan ekosistem pertanian, dan adaptasi terhadap perubahan iklim**. 
 
 ---
+

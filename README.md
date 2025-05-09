@@ -24,7 +24,7 @@ Dengan latar belakang inilah, proyek ini bertujuan menggabungkan data variabel i
 
 **Bhagat, D., Shah, S., & Gupta, R. K. (2024).**  
    *Crop Yield Prediction Using Machine Learning Approaches.*  
-   Makalah konferensi ini mengeksplorasi penggunaan beberapa model regresi—seperti Random Forest Regressor dan Linear Regression—dalam memprediksi hasil panen. Studi ini menguraikan langkah-langkah pengolahan data, proses seleksi fitur, dan evaluasi metrik performa (misalnya MAE, MSE, RMSE, dan R²), yang membantu mengoptimalkan model prediksi untuk aplikasi praktis di lapangan.  
+   Makalah konferensi ini mengeksplorasi penggunaan beberapa model regresi seperti Random Forest Regressor dan Linear Regression dalam memprediksi hasil panen. Studi ini menguraikan langkah-langkah pengolahan data, proses seleksi fitur, dan evaluasi metrik performa (misalnya MAE, MSE, RMSE, dan R²), yang membantu mengoptimalkan model prediksi untuk aplikasi praktis di lapangan.  
    *(Sumber: SpringerLink, [Link prosiding](https://link.springer.com/chapter/10.1007/978-3-031-62217-5_6))*
 
 ---
@@ -34,7 +34,7 @@ Dalam tahap ini, kita mendefinisikan tujuan bisnis dan konteks strategis di mana
 
 1. **Tujuan dan Manfaat Bisnis**  
    - Meningkatkan hasil panen dengan memberikan rekomendasi penggunaan pupuk dan teknik manajemen lahan yang tepat sehingga sumber daya dapat dimanfaatkan secara optimal.  
-   - Memberikan insight berbasis data yang dapat membantu petani, pengusaha pertanian, dan stakeholder lainnya dalam merencanakan strategi operasional—misalnya, pemilihan jenis pupuk atau adaptasi terhadap kondisi iklim mikro yang berubah.  
+   - Memberikan insight berbasis data yang dapat membantu petani, pengusaha pertanian, dan stakeholder lainnya dalam merencanakan strategi operasional misalnya, pemilihan jenis pupuk atau adaptasi terhadap kondisi iklim mikro yang berubah.  
    - Mengurangi biaya operasional melalui optimalisasi input, serta mendukung praktik pertanian berkelanjutan di tengah dinamika perubahan iklim.
 
 2. **Identifikasi Stakeholders**  

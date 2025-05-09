@@ -273,7 +273,26 @@ r2_lr = r2_score(y_test, y_pred_lr)
 print("Linear Regression Performance:")
 print(f"MAE: {mae_lr:.2f}, MSE: {mse_lr:.2f}, R2 Score: {r2_lr:.2f}")
 ```
+## **Insights:**
 
+Berikut beberapa insight yang dapat diambil:
+
+- **R² Score 0.93:**  
+  Nilai ini menunjukkan bahwa model Linear Regression mampu menjelaskan sekitar 93% variasi (variance) dalam data hasil panen. Artinya, sebagian besar variabilitas output (Crop Yield) berhasil di capture oleh model dari kombinasi fitur-fitur input yang tersedia. Ini merupakan indikasi performa yang sangat baik dalam konteks model regresi.
+
+- **Mean Absolute Error (MAE) 420.32:**  
+  MAE mengindikasikan bahwa rata-rata kesalahan prediksi model adalah sekitar 420 unit (misalnya, dalam satuan panen tertentu seperti kg/ha atau ton/ha, tergantung definisi dataset). Dengan mempertimbangkan skala nilai hasil panen dalam dataset, nilai ini bisa dianggap cukup baik jika selisih prediksi rata-rata tidak terlalu signifikan secara proporsional.
+
+- **Mean Squared Error (MSE) 296193.51:**  
+  MSE memberikan penalti lebih berat terhadap kesalahan yang besar karena error dikuadratkan. Meskipun nilainya tampak tinggi, hal ini biasa terjadi karena sensitivitas MSE terhadap outlier. Untuk interpretasi yang lebih intuitif, bisa menghitung Root Mean Squared Error (RMSE) yang kira-kira sebesar √296193.51 ≈ 543. Jika RMSE relatif sebanding dengan MAE, hal ini dapat mengindikasikan bahwa kesalahan prediksi tidak memiliki outlier yang ekstrem, atau setidaknya tidak dominan.
+
+**Kesimpulan Insight:**
+
+- **Model Fit yang Baik:** R² Score sebesar 0.93 mengindikasikan bahwa model Linear Regression memberikan fitting yang sangat baik untuk data ini.
+- **Kesalahan Prediksi:** MAE dan RMSE menunjukkan bahwa secara rata-rata prediksi model menyimpang sekitar 420 hingga 543 unit dari nilai aktual, tergantung metrik yang digunakan.
+- **Baseline yang Kuat:** Dengan performa seperti ini, Linear Regression menjadi baseline yang kuat untuk prediksi hasil panen. Meskipun demikian, perlu dipertimbangkan pula untuk mengeksplorasi model non-linear (misalnya, Random Forest atau Gradient Boosting) untuk melihat apakah peningkatan kinerja lebih lanjut dapat dicapai, terutama jika terdapat pola non-linear yang kompleks dalam data.
+
+---
 Dalam model ini, parameter default sudah mencukupi untuk membangun baseline. Karena model linear relatif sederhana, hasilnya juga memberikan gambaran awal kapan perlu berpindah ke model yang lebih kompleks.
 
 #### 2. Model Ensemble: Random Forest Regressor
@@ -343,6 +362,35 @@ Pada tahap tuning, grid parameter digunakan untuk menguji kombinasi yang berbeda
 - **n_estimators:** Menentukan banyaknya pohon dalam ensemble, yang dapat mempengaruhi kestabilan prediksi.  
 - **max_depth:** Membatasi kedalaman pohon membantu mencegah overfitting.  
 - **min_samples_split** dan **min_samples_leaf:** Menjamin bahwa setiap pembagian decision tree tidak terlalu spesifik terhadap data pelatihan sehingga meningkatkan generalisasi.
+
+## **Insights:**
+
+Berikut adalah beberapa insights yang dapat diambil dari output tuning model Random Forest dengan GridSearchCV:
+
+1. **Optimalisasi Hyperparameter:**  
+   - **Best parameters:**  
+     `{'max_depth': 10, 'min_samples_leaf': 2, 'min_samples_split': 5, 'n_estimators': 200}`  
+     GridSearchCV telah mengidentifikasi bahwa model dengan maksimum kedalaman (max_depth) sebesar 10, minimal 5 sampel untuk melakukan split (min_samples_split = 5), dan minimal 2 sampel di setiap leaf (min_samples_leaf = 2) bersama dengan 200 pohon (n_estimators = 200) menghasilkan performa terbaik.  
+   - **Makna Parameter:**  
+     - **max_depth=10:** Membatasi kedalaman pohon sehingga mencegah overfitting dan memastikan bahwa setiap pohon tidak terlalu kompleks.  
+     - **min_samples_split=5 & min_samples_leaf=2:** Menjamin bahwa node dalam pohon hanya akan di split jika memiliki cukup data, yang membantu dalam stabilisasi model dan mengurangi variabilitas prediksi.  
+     - **n_estimators=200:** Menggunakan 200 pohon membantu meningkatkan robustnes model dengan mengurangi variansi.
+
+2. **Evaluasi Performa Model Terbaik:**  
+   - **MAE:** 426.08  
+     Rata-rata kesalahan prediksi model adalah sekitar 426 unit.  
+   - **MSE:** 311,815.73  
+     MSE yang diperoleh mengindikasikan penalti yang lebih besar untuk error yang besar meskipun nilainya sedikit lebih rendah jika dibandingkan dengan pengaturan default.  
+   - **R² Score:** 0.92  
+     Model Tuned Random Forest mampu menjelaskan sekitar 92% variasi dalam data target (Crop Yield).  
+     
+   Performa dari model optimum ini menunjukkan sedikit perbaikan (misalnya, MAE menurun dari 430.11 ke 426.08) namun secara keseluruhan metrik seperti R² tetap berada di posisi yang mendekati 0.92.
+
+3. **Bandingkan dengan Model Baseline:**  
+   - **Model Linear Regression** sebelumnya menunjukkan R² Score sebesar 0.93 dengan MAE sekitar 420.32.  
+   - **Perbandingan:** Meskipun model Random Forest yang dituning menghasilkan performa yang cukup baik (R² 0.92), hasilnya hampir sebanding dengan model Linear Regression. Hal ini mengindikasikan bahwa hubungan prediktif pada dataset ini relatif mudah ditangkap dan mungkin tidak terlalu kompleks sehingga model linier sudah sangat kompetitif.
+
+Dengan demikian, tuning hyperparameter memberikan sedikit perbaikan terhadap model Random Forest, namun perbandingan dengan pendekatan model linier menunjukkan bahwa edge yang didapat dari penerapan ensemble pada dataset ini masih marginal. Langkah selanjutnya bisa mempertimbangkan eksplorasi metode lain atau penambahan data fitur agar model dapat meningkatkan kinerjanya secara signifikan.
 
 ---
 
